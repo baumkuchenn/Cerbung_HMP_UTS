@@ -14,8 +14,8 @@ export class CerbungserviceService {
     },
     {
       id: 2,
-      username: "Oktar",
-      password: "oktar123"
+      username: "Oktaryano",
+      password: "ryan123"
     }
   ];
 
@@ -33,7 +33,7 @@ export class CerbungserviceService {
       id: 2,
       title: "Gravity",
       genre: "Misteri",
-      author: "Oktar",
+      author: "Oktaryano",
       tglRilis: "13/09/2020",
       url: "https://all-things-andy-gavin.com/wp-content/uploads/2013/10/gravity-movie.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam odio sit amet augue semper, maximus mattis justo aliquet. Aliquam consequat mi mauris, eget posuere nunc suscipit et. Suspendisse eget tortor facilisis, dictum arcu eget, congue ipsum. Donec gravida neque nec dolor commodo malesuada. Aenean porttitor facilisis arcu, eget sodales lorem tincidunt vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;"
