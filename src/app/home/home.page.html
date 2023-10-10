@@ -1,20 +1,27 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Cerbung
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">cerbung</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- <div id="container"> -->
+  <ion-card *ngFor="let cerbung of cerbungs">
+    <img [src]="cerbung.url" style="height: auto; width: 97%; margin: 0 auto; margin-top: 3vh; display: block;">
+    <ion-card-header style="text-align: left;">
+      <ion-card-title>{{ cerbung.title }}</ion-card-title>
+      <ion-card-subtitle>by {{ cerbung.author }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content style="text-align: left;">{{ cerbung.shortDesc }}</ion-card-content>
+    <ion-button shape="round" style="float: right; margin-right: 3vh; margin-bottom: 3vh;">Read</ion-button>
+  </ion-card>
+  <!-- </div> -->
 </ion-content>

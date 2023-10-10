@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,13 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  jenistampilan = "card";
+  cerbungs: any[] = [];
+
+  constructor(private cerbungservice: CerbungserviceService) { }
+
+  ngOnInit() {
+    this.cerbungs = this.cerbungservice.cerbungs;
+  }
 
 }

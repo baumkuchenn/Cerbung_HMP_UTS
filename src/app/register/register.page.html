@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">sign up</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-input label="Username : " labelPlacement="floating" [(ngModel)]="username"></ion-input>
+  <ion-input label="Foto Profil (URL) : " labelPlacement="floating" [(ngModel)]="url"></ion-input>
+  <ion-input label="Password : " labelPlacement="floating" type="password" [(ngModel)]="password"></ion-input>
+  <ion-input label="Konfirmasi Password : " labelPlacement="floating" type="password" [(ngModel)]="confPass"></ion-input>
+  <ion-button id="btnRegister" expand="block" (click)="BtnRegister_OnClick()">Sign Up</ion-button>
+  <ion-text>
+    Sudah punya akun? 
+    <ion-router-link routerLink="/login" style="color: cyan; text-decoration: underline;">
+      Sign in
+    </ion-router-link>
+  </ion-text>  
+</ion-content>
