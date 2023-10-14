@@ -10,6 +10,7 @@ export class HomePage {
 
   jenistampilan = "card";
   cerbungs: any[] = [];
+  search = "";
 
   constructor(private cerbungservice: CerbungserviceService) { }
 

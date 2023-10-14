@@ -1,8 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-button slot="start" color="light">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-button>
+    <ion-title style="text-align: center;">
       Cerbung
     </ion-title>
+    <ion-button slot="end" color="light">
+      <ion-icon name="notifications-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -14,6 +20,7 @@
   </ion-header>
 
   <!-- <div id="container"> -->
+  <ion-input label="Search Cerbung" labelPlacement="floating" [(ngModel)]="search" style="height: auto; width: 97%; margin: 0 auto; margin-top: 3vh;"></ion-input>
   <ion-card *ngFor="let cerbung of cerbungs">
     <img [src]="cerbung.url" style="height: auto; width: 97%; margin: 0 auto; margin-top: 3vh; display: block;">
     <ion-card-header style="text-align: left;">
