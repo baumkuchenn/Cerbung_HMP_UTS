@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start" color="light">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-button>
+    <ion-title style="text-align: center;">Following</ion-title>
+    <ion-button slot="end" color="light">
+      <ion-icon name="notifications-outline" style="padding: 2vh;"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">following</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row *ngFor="let cerbung of cerbungs" routerLink="/read" style="border: 2px solid #FFFFFF; border-radius: 12px; margin: 16px; padding: 16px;">
+      <ion-col style="display: flex;">
+        <img [src]="cerbung.url" style="height: 32vh; width: 32vh; object-fit: cover;">
+        <div style="margin-left: 16px;">
+          <h3 style="margin-top: 0;"> {{ cerbung.title }} </h3>
+          by {{ cerbung.author }} <br>
+          Last update: {{ cerbung.tglRilis }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

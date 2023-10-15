@@ -19,6 +19,14 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
+  {
+    path: 'following',
+    loadChildren: () => import('./following/following.module').then( m => m.FollowingPageModule)
+  },
+  {
+    path: 'read',
+    loadChildren: () => import('./read/read.module').then( m => m.ReadPageModule)
+  },
 ];
 
 @NgModule({

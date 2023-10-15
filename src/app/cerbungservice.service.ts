@@ -26,6 +26,8 @@ export class CerbungserviceService {
       genre: "Romance",
       author: "Aldy",
       tglRilis: "20/09/2020",
+      like: 5,
+      paragraph: 3,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum faucibus consequat. Maecenas id mi quis leo elementum blandit. Duis tristique quam eget ligula pharetra, varius iaculis neque commodo. Nunc tempus eros massa. Nulla tristique vulputate turpis, sit amet sodales arcu iaculis eget. Ut eu lectus auctor, lobortis lacus in, malesuada tortor. Nunc fringilla mi ut tortor malesuada, eu efficitur sapien fringilla. Sed consequat augue id tortor luctus, nec tincidunt est dictum."
     },
@@ -35,6 +37,8 @@ export class CerbungserviceService {
       genre: "Misteri",
       author: "Oktaryano",
       tglRilis: "13/09/2020",
+      like: 6,
+      paragraph: 3,
       url: "https://all-things-andy-gavin.com/wp-content/uploads/2013/10/gravity-movie.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam odio sit amet augue semper, maximus mattis justo aliquet. Aliquam consequat mi mauris, eget posuere nunc suscipit et. Suspendisse eget tortor facilisis, dictum arcu eget, congue ipsum. Donec gravida neque nec dolor commodo malesuada. Aenean porttitor facilisis arcu, eget sodales lorem tincidunt vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;"
     },
@@ -44,6 +48,8 @@ export class CerbungserviceService {
       genre: "Comedy",
       author: "Aldy",
       tglRilis: "06/09/2020",
+      like: 0,
+      paragraph: 1,
       url: "https://www.willitsnews.com/wp-content/uploads/migration/2017/201706/NEWS_170609993_AR_0_RALMFSWTQIMI.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a leo non tortor accumsan maximus. Vestibulum orci eros, venenatis ac sem eu, auctor tristique turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum felis sit amet accumsan lobortis. Pellentesque sem ipsum, mollis eu leo et, blandit ultricies nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
     },
@@ -53,6 +59,8 @@ export class CerbungserviceService {
       genre: "Romance",
       author: "Oktar",
       tglRilis: "23/08/2020",
+      like: 0,
+      paragraph: 1,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a leo non tortor accumsan maximus. Vestibulum orci eros, venenatis ac sem eu, auctor tristique turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum felis sit amet accumsan lobortis. Pellentesque sem ipsum, mollis eu leo et, blandit ultricies nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris rutrum efficitur tortor at lacinia."
     }
@@ -90,9 +98,21 @@ export class CerbungserviceService {
       paragraf: "Fusce ullamcorper dolor tortor, eget ultricies metus varius eget. Fusce elit nisi, varius sed tristique ac, molestie nec enim. Cras in mauris et nisl pulvinar rhoncus. Sed laoreet vel tortor et interdum. Maecenas facilisis hendrerit lacus. Nam rhoncus, lectus et tempor venenatis, mauris dolor porttitor est, eu sollicitudin dolor eros eleifend mi. Aenean id nunc nec elit interdum hendrerit. Phasellus et ex suscipit tortor tincidunt varius. Nullam posuere dui diam, eu pharetra lectus accumsan commodo."
     },
     {
-      id: 5,
+      id: 6,
       author: "Oktar",
       judulCerbung: "Gravity",
+      paragraf: "Praesent suscipit odio id tortor feugiat consequat. Vivamus faucibus augue sed risus hendrerit, sed cursus metus varius. Donec nec lectus faucibus, cursus quam ac, ultricies ipsum. Maecenas placerat lorem non ligula eleifend malesuada. Proin malesuada tellus vitae augue imperdiet tempor. Nulla tempus risus in justo feugiat, in viverra lectus venenatis. Nunc ultricies lectus leo, eget tempus justo hendrerit vitae. Phasellus mi metus, pellentesque nec nibh sed, commodo vulputate dolor."
+    },
+    {
+      id: 7,
+      author: "Aldy",
+      judulCerbung: "Alien Covenant",
+      paragraf: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam odio sit amet augue semper, maximus mattis justo aliquet. Aliquam consequat mi mauris, eget posuere nunc suscipit et. Suspendisse eget tortor facilisis, dictum arcu eget, congue ipsum. Donec gravida neque nec dolor commodo malesuada. Aenean porttitor facilisis arcu, eget sodales lorem tincidunt vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent sed ex vitae felis vulputate lobortis. Pellentesque vel placerat ex. Phasellus elementum tellus eget tellus egestas, eu semper ligula ullamcorper. Sed rhoncus sapien nibh. In congue tristique massa at placerat. Mauris quis pulvinar dolor, non maximus urna. Nulla eget molestie neque. Donec ut libero a lectus placerat dapibus."
+    },
+    {
+      id: 8,
+      author: "Oktar",
+      judulCerbung: "2001: A Space Odyssey",
       paragraf: "Praesent suscipit odio id tortor feugiat consequat. Vivamus faucibus augue sed risus hendrerit, sed cursus metus varius. Donec nec lectus faucibus, cursus quam ac, ultricies ipsum. Maecenas placerat lorem non ligula eleifend malesuada. Proin malesuada tellus vitae augue imperdiet tempor. Nulla tempus risus in justo feugiat, in viverra lectus venenatis. Nunc ultricies lectus leo, eget tempus justo hendrerit vitae. Phasellus mi metus, pellentesque nec nibh sed, commodo vulputate dolor."
     }
   ];

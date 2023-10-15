@@ -1,15 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-following',
+  templateUrl: './following.page.html',
+  styleUrls: ['./following.page.scss'],
 })
-export class HomePage {
+export class FollowingPage implements OnInit {
 
   cerbungs: any[] = [];
-  search = "";
 
   constructor(private cerbungservice: CerbungserviceService) { }
 
