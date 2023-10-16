@@ -25,4 +25,41 @@
       <ion-label>Following</ion-label>
     </ion-segment-button>
   </ion-segment>
+
+  <div *ngIf="tampilan=='liked'">
+    <ion-grid>
+      <ion-row *ngFor="let user of penggunaAll"
+        style="border: 2px solid #FFFFFF; border-radius: 12px; margin: 16px; padding: 16px;">
+        <ion-col style="display: flex; align-items: center;">
+          <img [src]="user.foto" style="height: 12vh; width: 12vh; object-fit: cover; border-radius: 50%;">
+          <div style="margin-left: 16px;">
+            <h3 style="margin-top: 0;"> {{ user.username }} </h3>
+            since {{ user.tglDibuat | date:'yyyy' }}
+          </div>
+        </ion-col>
+        <ion-col class="ion-text-end"> <!-- Align content to the end (right) -->
+          <h1>{{ user.totalLike }}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="tampilan=='following'">
+    <ion-grid>
+      <ion-row *ngFor="let user of pengguna"
+        style="border: 2px solid #FFFFFF; border-radius: 12px; margin: 16px; padding: 16px;">
+        <ion-col style="display: flex; align-items: center;">
+          <img [src]="user.foto" style="height: 12vh; width: 12vh; object-fit: cover; border-radius: 50%;">
+          <div style="margin-left: 16px;">
+            <h3 style="margin-top: 0;"> {{ user.username }} </h3>
+            since {{ user.tglDibuat | date:'yyyy' }} <br>
+            Latest Post: {{ user.newestTglUpdate | date:'dd/MM/yyyy'}}
+          </div>
+        </ion-col>
+        <ion-col class="ion-text-end"> <!-- Align content to the end (right) -->
+          <h1>{{ user.totalLike }}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

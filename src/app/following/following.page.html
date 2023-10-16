@@ -23,7 +23,7 @@
         <div style="margin-left: 16px;">
           <h3 style="margin-top: 0;"> {{ cerbung.title }} </h3>
           by {{ cerbung.author }} <br>
-          Last update: {{ cerbung.tglRilis }}
+          Last update: {{ cerbung.newestTglUpdate | date:'dd/MM/yyyy'}}
         </div>
       </ion-col>
     </ion-row>

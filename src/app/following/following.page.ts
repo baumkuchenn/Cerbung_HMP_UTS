@@ -15,7 +15,7 @@ export class FollowingPage implements OnInit {
 
   ngOnInit() {
     this.loggedInUser = this.cerbungservice.getLoggedInUser();
-    this.cerbungs = this.cerbungservice.cerbungs.filter(cerbung => cerbung.author !== this.loggedInUser);
+    this.cerbungs = this.cerbungservice.getCerbungDanStory();
   }
 
 }
