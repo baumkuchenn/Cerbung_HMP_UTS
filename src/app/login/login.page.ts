@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CerbungserviceService } from '../cerbungservice.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +15,16 @@ export class LoginPage implements OnInit {
 
   constructor(
     private cerbungService: CerbungserviceService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) { }
 
   ngOnInit() {
+  }
+
+  sendData() {
+    const dataToSend = this.username;
+    this.router.navigate(['/home', { user: dataToSend }]);
   }
 
   async BtnLogin_OnClick() {
@@ -26,7 +33,7 @@ export class LoginPage implements OnInit {
       this.username = "";
       this.password = "";
     }
-    else{
+    else {
       await this.presentAlert();
     }
   }

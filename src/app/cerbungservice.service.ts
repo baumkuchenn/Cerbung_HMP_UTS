@@ -26,7 +26,7 @@ export class CerbungserviceService {
       genre: "Romance",
       author: "Aldy",
       tglRilis: "20/09/2020",
-      like: 5,
+      like: 6,
       paragraph: 3,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum faucibus consequat. Maecenas id mi quis leo elementum blandit. Duis tristique quam eget ligula pharetra, varius iaculis neque commodo. Nunc tempus eros massa. Nulla tristique vulputate turpis, sit amet sodales arcu iaculis eget. Ut eu lectus auctor, lobortis lacus in, malesuada tortor. Nunc fringilla mi ut tortor malesuada, eu efficitur sapien fringilla. Sed consequat augue id tortor luctus, nec tincidunt est dictum."
@@ -35,7 +35,7 @@ export class CerbungserviceService {
       id: 2,
       title: "Gravity",
       genre: "Misteri",
-      author: "Oktaryano",
+      author: "Oktar",
       tglRilis: "13/09/2020",
       like: 6,
       paragraph: 3,
@@ -117,13 +117,25 @@ export class CerbungserviceService {
     }
   ];
 
+  private loggedInUser: string | null = null;
+
   constructor(private router: Router) { }
 
   CekLogin(pUsername: string, pPassword: string) {
     const user = this.users.find(u => u.username === pUsername && u.password === pPassword);
     if (user) {
+      this.loggedInUser = pUsername;
       this.router.navigate(['/home']);
     }
     return !!user;
+  }
+
+  getHighestLikeCerbung(): number | null {
+    const result = this.cerbungs.reduce((max, current) => (current.like > max.like ? current : max), this.cerbungs[0]);
+    return result ? result.like : null;
+  }
+
+  getLoggedInUser(): string | null {
+    return this.loggedInUser;
   }
 }

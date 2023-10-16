@@ -9,11 +9,13 @@ import { CerbungserviceService } from '../cerbungservice.service';
 export class FollowingPage implements OnInit {
 
   cerbungs: any[] = [];
+  loggedInUser: string | null = null;
 
   constructor(private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
-    this.cerbungs = this.cerbungservice.cerbungs;
+    this.loggedInUser = this.cerbungservice.getLoggedInUser();
+    this.cerbungs = this.cerbungservice.cerbungs.filter(cerbung => cerbung.author !== this.loggedInUser);
   }
 
 }

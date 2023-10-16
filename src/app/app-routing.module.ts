@@ -27,6 +27,18 @@ const routes: Routes = [
     path: 'read',
     loadChildren: () => import('./read/read.module').then( m => m.ReadPageModule)
   },
+  {
+    path: 'create',
+    loadChildren: () => import('./create/create.module').then( m => m.CreatePageModule)
+  },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule)
+  },
+  {
+    path: 'pref',
+    loadChildren: () => import('./pref/pref.module').then( m => m.PrefPageModule)
+  },
 ];
 
 @NgModule({
