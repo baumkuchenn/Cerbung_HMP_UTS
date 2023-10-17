@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
   selector: 'app-pref',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrefPage implements OnInit {
 
-  constructor() { }
+  userProfile: { username: string; foto: string } | null = null;
+
+  constructor(private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
+    this.userProfile = this.cerbungservice.getUserProfile();
   }
-
 }

@@ -10,17 +10,24 @@
       <ion-title size="large">sign up</ion-title>
     </ion-toolbar>
   </ion-header>
-  <h1 style="text-align: center;">Sign up</h1>
+  <h1 style="text-align: center; margin-top: 10vh;">Sign up</h1>
   <h3 style="text-align: center;">Buat akun untuk Cerbung: Cerita Bersambung</h3>
-  <ion-input label="Username : " labelPlacement="floating" [(ngModel)]="username"></ion-input>
-  <ion-input label="Foto Profil (URL) : " labelPlacement="floating" [(ngModel)]="url"></ion-input>
-  <ion-input label="Password : " labelPlacement="floating" type="password" [(ngModel)]="password"></ion-input>
-  <ion-input label="Konfirmasi Password : " labelPlacement="floating" type="password" [(ngModel)]="confPass"></ion-input>
-  <ion-button id="btnRegister" expand="block" (click)="BtnRegister_OnClick()">Sign Up</ion-button>
-  <ion-text>
-    Sudah punya akun? 
-    <ion-router-link routerLink="/login" style="color: cyan; text-decoration: underline;">
-      Sign in
-    </ion-router-link>
-  </ion-text>  
+  <ion-input label="Username : " labelPlacement="floating" fill="outline" [(ngModel)]="username"
+    style="width: 90%; margin: auto; margin-top: 10vh;"></ion-input>
+  <ion-input label="Foto Profil (URL) : " labelPlacement="floating" fill="outline" [(ngModel)]="url"
+    style="width: 90%; margin: auto; margin-top: 3vh;"></ion-input>
+  <ion-input label="Password : " labelPlacement="floating" fill="outline" type="password" [(ngModel)]="password"
+    style="width: 90%; margin: auto; margin-top: 3vh;"></ion-input>
+  <ion-input label="Konfirmasi Password : " labelPlacement="floating" fill="outline" type="password"
+    [(ngModel)]="confPass" style="width: 90%; margin: auto; margin-top: 3vh;"></ion-input>
+  <ion-button id="btnRegister" expand="block" (click)="BtnRegister_OnClick()"
+    style="width: 90%; margin: auto; margin-top: 3vh;">Sign Up</ion-button>
+  <div style="margin-top: 3vh; text-align: center;">
+    <ion-text>
+      Sudah punya akun?
+      <ion-router-link routerLink="/login" style="color: cyan; text-decoration: underline;">
+        Sign in
+      </ion-router-link>
+    </ion-text>
+  </div>
 </ion-content>

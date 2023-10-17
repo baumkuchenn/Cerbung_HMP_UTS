@@ -16,4 +16,25 @@
       <ion-title size="large">pref</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div
+    style="position: relative; display: inline-block; width: 24vh; left: 50%; transform: translate(-40%); margin: 4vh 0;">
+    <img [src]="userProfile?.foto" style="height: 20vh; width: 20vh; object-fit: cover; border-radius: 50%;">
+    <ion-button style="position: absolute; bottom: 0; right: 0; --border-radius: 50%; height: 8vh; width: 8vh;">
+      <ion-icon name="power-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-input [label]="userProfile?.username" [disabled]="true" fill="solid"
+    style="width: 90%; margin: 0 auto; font-size: 20px;"></ion-input>
+  <div style="width: 90%; margin: 4vh auto; position: relative;">
+    Dark Mode <ion-toggle style="position: absolute; right: 0;"></ion-toggle><br><br>
+    Notifications <ion-toggle style="position: absolute; right: 0;"></ion-toggle>
+  </div>
+  <div style="border: 1px solid rgb(100, 100, 100); width: 95%; margin: 3vh auto;"></div>
+  <ion-input label="Old Password : " labelPlacement="floating" type="password" fill="outline"
+    style="width: 90%; margin: 3vh auto;"></ion-input>
+  <ion-input label="New Password : " labelPlacement="floating" type="password" fill="outline"
+    style="width: 90%; margin: 3vh auto;"></ion-input>
+  <ion-input label="Retype New Password : " labelPlacement="floating" type="password" fill="outline"
+    style="width: 90%; margin: 3vh auto;"></ion-input>
+  <ion-button shape="round" style="float: right; margin-right: 5%;">Change Password</ion-button>
 </ion-content>

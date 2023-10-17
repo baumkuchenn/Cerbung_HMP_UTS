@@ -161,6 +161,19 @@ export class CerbungserviceService {
     return this.loggedInUser;
   }
 
+  getUserProfile(): { username: string; foto: string } | null {
+    if (this.loggedInUser) {
+      const user = this.users.find(u => u.username === this.loggedInUser);
+      if (user) {
+        return {
+          username: user.username,
+          foto: user.foto
+        };
+      }
+    }
+    return null;
+  }
+
   getHighestLikeCerbung(): number | null {
     const result = this.cerbungs.reduce((max, current) => (current.like > max.like ? current : max), this.cerbungs[0]);
     return result ? result.like : null;
