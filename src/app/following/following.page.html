@@ -17,7 +17,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-grid>
-    <ion-row *ngFor="let cerbung of cerbungs" routerLink="/read" style="border: 2px solid #FFFFFF; border-radius: 12px; margin: 16px; padding: 16px;">
+    <ion-row *ngFor="let cerbung of cerbungs" [routerLink]="['/read', cerbung.title]" style="border: 2px solid #FFFFFF; border-radius: 12px; margin: 16px; padding: 16px;">
       <ion-col style="display: flex;">
         <img [src]="cerbung.url" style="height: 32vh; width: 32vh; object-fit: cover;">
         <div style="margin-left: 16px;">

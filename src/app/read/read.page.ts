@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CerbungserviceService } from '../cerbungservice.service';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-read',
@@ -13,9 +14,12 @@ export class ReadPage implements OnInit {
   storys: any | null = null;
   isRequestingContribute: boolean = false;
   newParagraph: string = '';
+  buttonVisible = true;
+  cerbungLikes: { [title: string]: boolean } = {};
 
   constructor(
     private cerbungservice: CerbungserviceService,
+    private alertController: AlertController,
     private route: ActivatedRoute
   ) { }
 
@@ -28,29 +32,52 @@ export class ReadPage implements OnInit {
     this.storys = this.cerbungservice.storys.filter(story => story.cerbungTitle == this.cerbungTitle) || null;
   }
 
+  isLiked(cerbungTitle: string): boolean {
+    return this.cerbungLikes[cerbungTitle] || false;
+  }
+
   tambahLike(title: string) {
     const cerbung = this.cerbungservice.cerbungs.find(cerbung => cerbung.title === title);
     if (cerbung) {
-      cerbung.like += 1;
+      this.cerbungLikes[title] = !this.isLiked(title);
+      cerbung.like += this.isLiked(title) ? 1 : -1;
     }
   }
+
   tambahParagraf(title: string) {
     const story = this.cerbungservice.storys.find(story => story.cerbungTitle == title);
     if (story) {
       story.paragraf += 1;
     }
   }
+
   toggleRequestContribute() {
     this.isRequestingContribute = !this.isRequestingContribute;
+    this.buttonVisible = false;
   }
-  submitContribution() {
+
+  async submitContribution() {
     if (this.newParagraph.length > 0) {
       // Anda dapat menambahkan logika untuk menyimpan paragraf baru ke dalam cerbung di sini
       // Misalnya, dengan menambahkannya ke array storys atau mengirimkannya ke server.
       // Setelah itu, atur kembali isRequestingContribute menjadi false.
       // ...
       this.isRequestingContribute = false;
+      this.buttonVisible = true;
       this.newParagraph = ''; // Mengosongkan input setelah mengirimkan kontribusi
     }
+    else {
+      await this.presentAlert();
+    }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Paragraf Kosong',
+      message: 'Paragraf tidak boleh kosong',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
