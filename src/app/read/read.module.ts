@@ -15,6 +15,6 @@ import { ReadPage } from './read.page';
     IonicModule,
     ReadPageRoutingModule
   ],
-  declarations: [ReadPage]
+  declarations: [ReadPage], // Pastikan ReadPage ada di sini
 })
 export class ReadPageModule {}

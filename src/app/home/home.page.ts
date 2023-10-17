@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
+
 export class HomePage {
 
   cerbungs: any[] = [];

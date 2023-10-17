@@ -35,6 +35,13 @@ export class CerbungserviceService {
       password: "ryan123",
       tglDibuat: new Date("2020-08-01"),
       foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
+    },
+    {
+      id: 3,
+      username: "Daniel",
+      password: "daniel123",
+      tglDibuat: new Date("2020-07-01"),
+      foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
     }
   ];
 
@@ -46,7 +53,7 @@ export class CerbungserviceService {
       author: "Aldy",
       tglRilis: new Date("2020-09-20"),
       like: 3,
-      paragraph: 3,
+      paragraph: 4,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum faucibus consequat. Maecenas id mi quis leo elementum blandit. Duis tristique quam eget ligula pharetra, varius iaculis neque commodo. Nunc tempus eros massa. Nulla tristique vulputate turpis, sit amet sodales arcu iaculis eget. Ut eu lectus auctor, lobortis lacus in, malesuada tortor. Nunc fringilla mi ut tortor malesuada, eu efficitur sapien fringilla. Sed consequat augue id tortor luctus, nec tincidunt est dictum."
     },
@@ -79,7 +86,7 @@ export class CerbungserviceService {
       author: "Oktar",
       tglRilis: new Date("2020-08-23"),
       like: 0,
-      paragraph: 1,
+      paragraph: 2,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a leo non tortor accumsan maximus. Vestibulum orci eros, venenatis ac sem eu, auctor tristique turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum felis sit amet accumsan lobortis. Pellentesque sem ipsum, mollis eu leo et, blandit ultricies nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris rutrum efficitur tortor at lacinia."
     }
@@ -141,7 +148,21 @@ export class CerbungserviceService {
       author: "Oktar",
       tglUpdate: new Date("2020-08-23"),
       paragraf: "Praesent suscipit odio id tortor feugiat consequat. Vivamus faucibus augue sed risus hendrerit, sed cursus metus varius. Donec nec lectus faucibus, cursus quam ac, ultricies ipsum. Maecenas placerat lorem non ligula eleifend malesuada. Proin malesuada tellus vitae augue imperdiet tempor. Nulla tempus risus in justo feugiat, in viverra lectus venenatis. Nunc ultricies lectus leo, eget tempus justo hendrerit vitae. Phasellus mi metus, pellentesque nec nibh sed, commodo vulputate dolor."
-    }
+    },
+    {
+      id: 9,
+      cerbungTitle: "2001: A Space Odyssey",
+      author: "Daniel",
+      tglUpdate: new Date("2020-08-24"),
+      paragraf: "Praesent suscipit odio id tortor feugiat consequat. Vivamus faucibus augue sed risus hendrerit, sed cursus metus varius. Donec nec lectus faucibus, cursus quam ac, ultricies ipsum. Maecenas placerat lorem non ligula eleifend malesuada. Proin malesuada tellus vitae augue imperdiet tempor. Nulla tempus risus in justo feugiat, in viverra lectus venenatis. Nunc ultricies lectus leo, eget tempus justo hendrerit vitae. Phasellus mi metus, pellentesque nec nibh sed, commodo vulputate dolor."
+    },
+    {
+      id: 10,
+      cerbungTitle: "Interstellar",
+      author: "Daniel",
+      tglUpdate: new Date("2020-08-26"),
+      paragraf: "Praesent suscipit odio id tortor feugiat consequat. Vivamus faucibus augue sed risus hendrerit, sed cursus metus varius. Donec nec lectus faucibus, cursus quam ac, ultricies ipsum. Maecenas placerat lorem non ligula eleifend malesuada. Proin malesuada tellus vitae augue imperdiet tempor. Nulla tempus risus in justo feugiat, in viverra lectus venenatis. Nunc ultricies lectus leo, eget tempus justo hendrerit vitae. Phasellus mi metus, pellentesque nec nibh sed, commodo vulputate dolor."
+    },
   ];
 
   private loggedInUser: string | null = null;
