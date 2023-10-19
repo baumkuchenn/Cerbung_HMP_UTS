@@ -4,7 +4,7 @@
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-button>
     <ion-title style="text-align: center">Cerbung Read</ion-title>
-    <ion-button slot="end" color="light">
+    <ion-button slot="end" color="light" [routerLink]="['/notification']">
       <ion-icon name="notifications-outline" style="padding: 2vh"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -18,9 +18,15 @@
   </ion-header>
 
   <div style="margin: 2vh">
-    <ion-card *ngFor="let cerbung of cerbungs" style="border-radius: 12px; margin-top: 2vh"
-      [hidden]="isRequestingContribute">
-      <img [src]="cerbung.url" style="height: 39vh; width: 100%; display: block; object-fit: cover" />
+    <ion-card
+      *ngFor="let cerbung of cerbungs"
+      style="border-radius: 12px; margin-top: 2vh"
+      [hidden]="isRequestingContribute"
+    >
+      <img
+        [src]="cerbung.url"
+        style="height: 39vh; width: 100%; display: block; object-fit: cover"
+      />
       <ion-card-header style="text-align: left">
         <ion-card-title>{{cerbung.title}}</ion-card-title>
         <ion-card-subtitle style="align-items: center">
@@ -29,57 +35,105 @@
             <ion-icon name="thumbs-up" style="margin-left: 8px"></ion-icon>
             {{cerbungservice.getLikeCount(cerbung.title)}}
             <ion-card
-              style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
+              style="
+                background-color: #686565;
+                color: #fff;
+                font-size: 16px;
+                padding: 8px;
+                border-radius: 4px;
+                width: fit-content;
+                margin: 1vh 0;
+              "
+            >
               {{cerbung.genre}}
             </ion-card>
           </div>
-          <div style="display: flex; justify-content: space-between;">
+          <div style="display: flex; justify-content: space-between">
             <label>by {{cerbung.author}}</label>
             <label>{{ cerbung.tglRilis | date:'dd/MM/yyyy'}}</label>
           </div>
         </ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content *ngFor="let story of storys" style="text-align: justify">
+      <ion-card-content
+        *ngFor="let story of storys"
+        style="text-align: justify"
+      >
         {{story.paragraf}}
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div style="display: flex; align-items: center;">
-            <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <div style="display: flex; align-items: center">
+            <ion-icon
+              name="person-outline"
+              style="margin-right: 8px"
+            ></ion-icon>
             {{ story.author }}
           </div>
-          <ion-button (click)="tambahLike(story.paragraf)" style="color: white; --background: transparent;">
+          <ion-button
+            (click)="tambahLike(story.paragraf)"
+            style="color: white; --background: transparent"
+          >
             <ion-icon *ngIf="story.like === 1" name="thumbs-up"></ion-icon>
-            <ion-icon *ngIf="story.like === 0" name="thumbs-up-outline"></ion-icon>
+            <ion-icon
+              *ngIf="story.like === 0"
+              name="thumbs-up-outline"
+            ></ion-icon>
           </ion-button>
         </div>
       </ion-card-content>
-      <ion-button shape="round" style="float: right; margin-right: 2vh; margin-bottom: 3vh"
-        (click)="toggleRequestContribute()" [hidden]="isRequestingContribute"
-        [style.display]="buttonVisible ? 'block' : 'none'">
+      <ion-button
+        shape="round"
+        style="float: right; margin-right: 2vh; margin-bottom: 3vh"
+        (click)="toggleRequestContribute()"
+        [hidden]="isRequestingContribute"
+        [style.display]="buttonVisible ? 'block' : 'none'"
+      >
         + Request to Contribute
       </ion-button>
       <!-- Bagian "Submit" yang sekarang ditempatkan di dalam bagian "+ Request" -->
-      <ion-card-content *ngIf="isRequestingContribute" style="text-align: justify">
+      <ion-card-content
+        *ngIf="isRequestingContribute"
+        style="text-align: justify"
+      >
         <!-- Input untuk paragraf baru -->
-        <ion-textarea label="Continue the Story" labelPlacement="floating" fill="outline" rows="5"
-          [(ngModel)]="newParagraph" #paragraphInput maxlength="70"></ion-textarea>
+        <ion-textarea
+          label="Continue the Story"
+          labelPlacement="floating"
+          fill="outline"
+          rows="5"
+          [(ngModel)]="newParagraph"
+          #paragraphInput
+          maxlength="70"
+        ></ion-textarea>
 
         <!-- Menampilkan penghitungan karakter -->
-        <div class="character-count" style="text-align: right;">
+        <div class="character-count" style="text-align: right">
           ({{ newParagraph.length }}/70 characters)
         </div>
 
         <!-- Tombol "Submit" untuk mengirim paragraf baru -->
-        <ion-button (click)="submitContribution()" style="
+        <ion-button
+          (click)="submitContribution()"
+          style="
             color: white;
             float: right;
             margin-top: 2vh;
             margin-bottom: 3vh;
-          " shape="round">
+          "
+          shape="round"
+        >
           Submit
         </ion-button>
       </ion-card-content>
 
-      <ion-button shape="round" style="float: left; margin-left: 2vh; margin-bottom: 3vh">
+      <ion-button
+        shape="round"
+        style="float: left; margin-left: 2vh; margin-bottom: 3vh"
+      >
         + Follow
       </ion-button>
     </ion-card>

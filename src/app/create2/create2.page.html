@@ -3,9 +3,9 @@
     <ion-button slot="start" color="light">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-button>
-    <ion-title style="text-align: center;">Create Cerbung</ion-title>
-    <ion-button slot="end" color="light">
-      <ion-icon name="notifications-outline" style="padding: 2vh;"></ion-icon>
+    <ion-title style="text-align: center">Create Cerbung</ion-title>
+    <ion-button slot="end" color="light" [routerLink]="['/notification']">
+      <ion-icon name="notifications-outline" style="padding: 2vh"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -17,60 +17,65 @@
     </ion-toolbar>
   </ion-header>
 
-  <div style="width: 90%; margin: auto; margin-top: 2vh;margin-bottom: 5vh;">
-    
+  <div style="width: 90%; margin: auto; margin-top: 2vh; margin-bottom: 5vh">
     <ion-list>
       <ion-radio-group value="restricted">
         <ion-list-header>
           <ion-label>Acces to this Cerbung</ion-label>
         </ion-list-header>
-    
+
         <ion-item>
           <ion-radio slot="start" value="restricted"></ion-radio>
-          <ion-label>Restricted <br>
+          <ion-label
+            >Restricted <br />
             <ion-text>(all approved users can contributes)</ion-text>
           </ion-label>
         </ion-item>
-    
+
         <ion-item>
           <ion-radio slot="start" value="public"></ion-radio>
-          <ion-label>Public <br>
+          <ion-label
+            >Public <br />
             <ion-text>(all users can contributes)</ion-text>
           </ion-label>
         </ion-item>
       </ion-radio-group>
     </ion-list>
-    
   </div>
-  <ion-textarea [(ngModel)]="newParagraph" #paragraphInput
-  maxlength="70" label="Write First Paragraph" labelPlacement="floating" placeholder="Enter text" fill="outline"
-  rows="10" style="width: 90%; margin: auto; margin-top: 2vh;"></ion-textarea>
-  
-  <div class="character-count" style="text-align: right; width: 90%; margin: auto; margin-top: 2vh;">
+  <ion-textarea
+    [(ngModel)]="newParagraph"
+    #paragraphInput
+    maxlength="70"
+    label="Write First Paragraph"
+    labelPlacement="floating"
+    placeholder="Enter text"
+    fill="outline"
+    rows="10"
+    style="width: 90%; margin: auto; margin-top: 2vh"
+  ></ion-textarea>
+
+  <div
+    class="character-count"
+    style="text-align: right; width: 90%; margin: auto; margin-top: 2vh"
+  >
     ({{ newParagraph.length }}/70 characters)
   </div>
-  
-    <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
-      <ion-col size="4">
-        <ion-router-link routerLink="/create">
-          <ion-button fill="outline" shape="round">
-            Previous
-          </ion-button>
-        </ion-router-link>
-      </ion-col>
-      <ion-col size="4" class="ion-text-center">
-        <ion-text>
-          <p>2 of 3</p>
-        </ion-text>
-      </ion-col>
-      <ion-col size="4" class="ion-text-end">
-        
-          <ion-button (click)="goToPage3()" fill="outline" shape="round">
-            Next
-          </ion-button>
-        
-      </ion-col>
-    </ion-row>
-    
-    
+
+  <ion-row style="margin-top: 10vh; margin-bottom: 10vh">
+    <ion-col size="4">
+      <ion-router-link routerLink="/create">
+        <ion-button fill="outline" shape="round"> Previous </ion-button>
+      </ion-router-link>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-text>
+        <p>2 of 3</p>
+      </ion-text>
+    </ion-col>
+    <ion-col size="4" class="ion-text-end">
+      <ion-button (click)="goToPage3()" fill="outline" shape="round">
+        Next
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>
