@@ -18,18 +18,8 @@
   </ion-header>
   <ion-card *ngFor="let notification of notifications">
     <ion-card-content>
-      {{notification.tglUpdate | date:'dd/MM/yyyy'}}
+      {{notification.tglUpdate | date:'dd/MM/yyyy'}} <br>
+      {{ notification.message }}
     </ion-card-content>
-    <div style="display: flex; justify-content: space-between">
-      <label style="margin-left: 10px">{{ notification.message }} </label>
-      <a *ngIf="notification.respond==true" style="margin-right: 10px">View</a>
-      <a
-        *ngIf="notification.respond === false"
-        [routerLink]="['/respond']"
-        style="margin-right: 10px"
-      >
-        Respond
-      </a>
-    </div>
   </ion-card>
 </ion-content>
