@@ -41,7 +41,7 @@
       username: "Daniel",
       password: "daniel123",
       tglDibuat: new Date("2020-07-01"),
-      foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
+      foto: "https://ih1.redbubble.net/image.4988490001.6938/poster,504x498,f8f8f8-pad,600x600,f8f8f8.jpg"
     }
   ];
 
