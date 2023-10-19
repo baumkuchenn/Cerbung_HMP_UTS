@@ -38,7 +38,11 @@ const routes: Routes = [
   {
     path: 'pref',
     loadChildren: () => import('./pref/pref.module').then( m => m.PrefPageModule)
+  },  {
+    path: 'create2',
+    loadChildren: () => import('./create2/create2.module').then( m => m.Create2PageModule)
   },
+
 ];
 
 @NgModule({

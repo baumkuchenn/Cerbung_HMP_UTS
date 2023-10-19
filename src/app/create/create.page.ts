@@ -12,4 +12,5 @@ export class CreatePage implements OnInit {
   ngOnInit() {
   }
 
+  options = ['Action','Horror','Sci-fi','Drama','Thriller']
 }
