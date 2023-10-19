@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start" color="light">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-button>
+    <ion-title style="text-align: center">Notifications</ion-title>
+    <ion-button slot="end" color="light" [routerLink]="['/notification']">
+      <ion-icon name="notifications-outline" style="padding: 2vh"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">notification</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card *ngFor="let notification of notifications">
+    <ion-card-content>
+      {{notification.tglUpdate | date:'dd/MM/yyyy'}}
+    </ion-card-content>
+    <div style="display: flex; justify-content: space-between">
+      <label style="margin-left: 10px">{{ notification.message }} </label>
+      <a *ngIf="notification.respond==true" style="margin-right: 10px">View</a>
+      <a
+        *ngIf="notification.respond === false"
+        [routerLink]="['/respond']"
+        style="margin-right: 10px"
+      >
+        Respond
+      </a>
+    </div>
+  </ion-card>
+</ion-content>

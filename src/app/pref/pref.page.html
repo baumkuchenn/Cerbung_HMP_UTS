@@ -3,9 +3,9 @@
     <ion-button slot="start" color="light">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-button>
-    <ion-title style="text-align: center;">Prefs</ion-title>
-    <ion-button slot="end" color="light">
-      <ion-icon name="notifications-outline" style="padding: 2vh;"></ion-icon>
+    <ion-title style="text-align: center">Prefs</ion-title>
+    <ion-button slot="end" color="light" [routerLink]="['/notification']">
+      <ion-icon name="notifications-outline" style="padding: 2vh"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -17,24 +17,75 @@
     </ion-toolbar>
   </ion-header>
   <div
-    style="position: relative; display: inline-block; width: 24vh; left: 50%; transform: translate(-40%); margin: 4vh 0;">
-    <img [src]="userProfile?.foto" style="height: 20vh; width: 20vh; object-fit: cover; border-radius: 50%;">
-    <ion-button (click)="BtnLogOut_OnClick()" style="position: absolute; bottom: 0; right: 0; --border-radius: 50%; height: 8vh; width: 8vh;">
+    style="
+      position: relative;
+      display: inline-block;
+      width: 24vh;
+      left: 50%;
+      transform: translate(-40%);
+      margin: 4vh 0;
+    "
+  >
+    <img
+      [src]="userProfile?.foto"
+      style="height: 20vh; width: 20vh; object-fit: cover; border-radius: 50%"
+    />
+    <ion-button
+      (click)="BtnLogOut_OnClick()"
+      style="
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        --border-radius: 50%;
+        height: 8vh;
+        width: 8vh;
+      "
+    >
       <ion-icon name="power-outline"></ion-icon>
     </ion-button>
   </div>
-  <ion-input [label]="userProfile?.username" [disabled]="true" fill="solid"
-    style="width: 90%; margin: 0 auto; font-size: 20px;"></ion-input>
-  <div style="width: 90%; margin: 4vh auto; position: relative;">
-    Dark Mode <ion-toggle style="position: absolute; right: 0;"></ion-toggle><br><br>
-    Notifications <ion-toggle style="position: absolute; right: 0;"></ion-toggle>
+  <ion-input
+    [label]="userProfile?.username"
+    [disabled]="true"
+    fill="solid"
+    style="width: 90%; margin: 0 auto; font-size: 20px"
+  ></ion-input>
+  <div style="width: 90%; margin: 4vh auto; position: relative">
+    Dark Mode <ion-toggle style="position: absolute; right: 0"></ion-toggle
+    ><br /><br />
+    Notifications <ion-toggle style="position: absolute; right: 0"></ion-toggle>
   </div>
-  <div style="border: 1px solid rgb(100, 100, 100); width: 95%; margin: 3vh auto;"></div>
-  <ion-input label="Old Password : " labelPlacement="floating" type="password" fill="outline" [(ngModel)]="oldPass"
-    style="width: 90%; margin: 3vh auto;"></ion-input>
-  <ion-input label="New Password : " labelPlacement="floating" type="password" fill="outline" [(ngModel)]="newPass"
-    style="width: 90%; margin: 3vh auto;"></ion-input>
-  <ion-input label="Retype New Password : " labelPlacement="floating" type="password" fill="outline" [(ngModel)]="confNewPass"
-    style="width: 90%; margin: 3vh auto;"></ion-input>
-  <ion-button shape="round" (click)="BtnChangePass_OnClick()" style="float: right; margin-right: 5%;">Change Password</ion-button>
+  <div
+    style="border: 1px solid rgb(100, 100, 100); width: 95%; margin: 3vh auto"
+  ></div>
+  <ion-input
+    label="Old Password : "
+    labelPlacement="floating"
+    type="password"
+    fill="outline"
+    [(ngModel)]="oldPass"
+    style="width: 90%; margin: 3vh auto"
+  ></ion-input>
+  <ion-input
+    label="New Password : "
+    labelPlacement="floating"
+    type="password"
+    fill="outline"
+    [(ngModel)]="newPass"
+    style="width: 90%; margin: 3vh auto"
+  ></ion-input>
+  <ion-input
+    label="Retype New Password : "
+    labelPlacement="floating"
+    type="password"
+    fill="outline"
+    [(ngModel)]="confNewPass"
+    style="width: 90%; margin: 3vh auto"
+  ></ion-input>
+  <ion-button
+    shape="round"
+    (click)="BtnChangePass_OnClick()"
+    style="float: right; margin-right: 5%"
+    >Change Password</ion-button
+  >
 </ion-content>

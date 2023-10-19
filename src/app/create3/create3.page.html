@@ -3,9 +3,9 @@
     <ion-button slot="start" color="light">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-button>
-    <ion-title style="text-align: center;">Create Cerbung</ion-title>
-    <ion-button slot="end" color="light">
-      <ion-icon name="notifications-outline" style="padding: 2vh;"></ion-icon>
+    <ion-title style="text-align: center">Create Cerbung</ion-title>
+    <ion-button slot="end" color="light" [routerLink]="['/notification']">
+      <ion-icon name="notifications-outline" style="padding: 2vh"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -31,29 +31,29 @@
     <ion-checkbox labelPlacement="end">I agree with the rules and policies in creating Cerbung. This includes not
       containing racial slurs, discrimination, religion, advertisements, and politics</ion-checkbox>
   </div>
-
-
-  <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
-    <ion-col size="4">
-      <ion-router-link routerLink="/create2">
-        <ion-button fill="outline" shape="round">
-          Previous
-        </ion-button>
-      </ion-router-link>
-    </ion-col>
-    <ion-col size="4" class="ion-text-center">
-      <ion-text>
-        <p>3 of 3</p>
-      </ion-text>
-    </ion-col>
-    <ion-col size="4" class="ion-text-end">
-      <ion-router-link routerLink="/home">
-        <ion-button fill="outline" shape="round">
-          Publish This Cerbung
-        </ion-button>
-      </ion-router-link>
-    </ion-col>
-  </ion-row>
-
-
+    
+    
+    <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
+      <ion-col size="4">
+        <ion-router-link routerLink="/create2">
+          <ion-button fill="outline" shape="round">
+            Previous
+          </ion-button>
+        </ion-router-link>
+      </ion-col>
+      <ion-col size="4" class="ion-text-center">
+        <ion-text>
+          <p>3 of 3</p>
+        </ion-text>
+      </ion-col>
+      <ion-col size="4" class="ion-text-end">
+        <ion-router-link routerLink="/home">
+          <ion-button fill="outline" shape="round">
+            Publish This Cerbung
+          </ion-button>
+        </ion-router-link>
+      </ion-col>
+    </ion-row>
+    
+    
 </ion-content>
