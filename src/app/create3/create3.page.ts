@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class Create3Page implements OnInit {
 
-  retrievedData: any = {};
+  retrievedData: string = '';
 
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {

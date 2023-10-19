@@ -11,19 +11,13 @@ export class Create2Page implements OnInit {
   access: string = '';
   newParagraph: string = '';
 
-  retrievedData: any = {};
-
-  constructor(private router: Router, private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.retrievedData = params['data'];
-    });
-  }
+  constructor(private router: Router){}
+  
 
   goToPage3() {
     this.router.navigate(['/create3'], {
       queryParams: {
         data: {
-          retieve:this.retrievedData,
           access:this.access,
           paragraph:this.newParagraph,
         }

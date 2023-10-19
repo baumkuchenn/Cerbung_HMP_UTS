@@ -169,6 +169,9 @@ export class CerbungserviceService {
 
   constructor(private router: Router) { }
 
+  addCerbung(pTitle:string, pGenre:string, pAuthor:string,tglRilis:Date, pLike:number, pParagraph:number, pShortDesc:string){
+    this.cerbungs.push()
+  }
   CekLogin(pUsername: string, pPassword: string) {
     const user = this.users.find(u => u.username === pUsername && u.password === pPassword);
     if (user) {
