@@ -20,7 +20,7 @@
   <div style="width: 90%; margin: auto; margin-top: 2vh;margin-bottom: 5vh;">
     
     <ion-list>
-      <ion-radio-group>
+      <ion-radio-group value="restricted">
         <ion-list-header>
           <ion-label>Acces to this Cerbung</ion-label>
         </ion-list-header>
@@ -63,11 +63,11 @@
         </ion-text>
       </ion-col>
       <ion-col size="4" class="ion-text-end">
-        <ion-router-link routerLink="/create3">
-          <ion-button fill="outline" shape="round">
+        
+          <ion-button (click)="goToPage3()" fill="outline" shape="round">
             Next
           </ion-button>
-        </ion-router-link>
+        
       </ion-col>
     </ion-row>
     

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create3',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Create3Page implements OnInit {
 
-  constructor() { }
+  retrievedData: any = {};
+
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.retrievedData = params['data'];
+    });
+  }
 
   ngOnInit() {
   }

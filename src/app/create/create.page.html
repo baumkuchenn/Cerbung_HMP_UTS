@@ -17,15 +17,15 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-input label="Cerbung Title" labelPlacement="floating" placeholder="Enter text" fill="outline"
+  <ion-input [(ngModel)]="title" label="Cerbung Title" labelPlacement="floating" placeholder="Enter text" fill="outline"
     style="width: 90%; margin: auto; margin-top: 5vh;"></ion-input>
-  <ion-textarea label="Short Description" labelPlacement="floating" placeholder="Enter text" fill="outline" rows="10"
+  <ion-textarea [(ngModel)]="desc" label="Short Description" labelPlacement="floating" placeholder="Enter text" fill="outline" rows="10"
     style="width: 90%; margin: auto; margin-top: 2vh;"></ion-textarea>
-  <ion-input label="Cerbung Image Cover" labelPlacement="floating" placeholder="Enter text" fill="outline"
+  <ion-input [(ngModel)]="image" label="Cerbung Image Cover" labelPlacement="floating" placeholder="Enter text" fill="outline"
     style="width: 90%; margin: auto; margin-top: 2vh;"></ion-input>
   <ion-select label="Choose Genre" labelPlacement="floating" placeholder="Genres" fill="outline"
     style="width: 90%; margin: auto; margin-top: 2vh;">
-    <ion-select-option *ngFor="let item of options" [value]="item">{{item}}</ion-select-option>
+    <ion-select-option [(ngModel)]="genre" *ngFor="let item of options" [value]="item">{{item}}</ion-select-option>
   </ion-select>
 
   <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
@@ -36,11 +36,9 @@
     </ion-col>
 
     <ion-col size="3" class="ion-text-end">
-      <ion-router-link routerLink="/create2">
-        <ion-button fill="outline" shape="round">
+        <ion-button (click)="goToPage2()" fill="outline" shape="round">
           Next
         </ion-button>
-      </ion-router-link>
     </ion-col>
   </ion-row>
 
