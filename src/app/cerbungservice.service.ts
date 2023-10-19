@@ -177,7 +177,7 @@ export class CerbungserviceService {
 
   constructor(private router: Router) { }
 
-  addCerbung(pTitle:string, pGenre:string, pAuthor:string,tglRilis:Date, pLike:number, pParagraph:number, pShortDesc:string){
+  addCerbung(pTitle: string, pGenre: string, pAuthor: string, tglRilis: Date, pLike: number, pParagraph: number, pShortDesc: string) {
     this.cerbungs.push()
   }
   CekLogin(pUsername: string, pPassword: string) {
@@ -242,6 +242,33 @@ export class CerbungserviceService {
 
   getAllLikeCounts(): Map<string, number> {
     return this.cerbungLikes;
+  }
+
+  createCerbung(newCerbung: any): void {
+    newCerbung.id = this.cerbungs.length + 1;
+    newCerbung.tglRilis = new Date();
+    this.cerbungs.push(newCerbung);
+  }
+
+  createStory(cerbungTitle: string, paragraf: string) {
+    const newStory: any = {
+      cerbungTitle: cerbungTitle,
+      paragraf: paragraf,
+    };
+    this.storys.push(newStory);
+  }
+
+  getCerbungById(cerbungId: number): any | undefined {
+    return this.cerbungs.find((cerbung) => cerbung.id === cerbungId);
+  }
+
+  getStoryByCerbung(cerbungTitle: string): string | undefined {
+    const storyItem = this.storys.find((story) => story.cerbungTitle === cerbungTitle);
+    return storyItem?.paragraf;
+  }
+
+  getAllCerbung(): any[] {
+    return this.cerbungs;
   }
 
 

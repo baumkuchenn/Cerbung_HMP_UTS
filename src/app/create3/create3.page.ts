@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
   selector: 'app-create3',
@@ -8,15 +9,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class Create3Page implements OnInit {
 
-  retrievedData: string = '';
+  cerbungs: any = [];
+  storys: any = [];
 
-  constructor(private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.retrievedData = params['data'];
-    });
-  }
+  constructor(private cerbungservice:CerbungserviceService) {  }
 
   ngOnInit() {
+    this.cerbungs = this.cerbungservice.cerbungs.pop();
+    this.storys = this.cerbungservice.storys.pop();
   }
+
 
 }

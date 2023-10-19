@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
   selector: 'app-create2',
@@ -11,21 +12,19 @@ export class Create2Page implements OnInit {
   access: string = '';
   newParagraph: string = '';
 
-  constructor(private router: Router){}
-  
-
-  goToPage3() {
-    this.router.navigate(['/create3'], {
-      queryParams: {
-        data: {
-          access:this.access,
-          paragraph:this.newParagraph,
-        }
-      },
-    });
-  }
+  constructor(private router: Router,
+    private cerbungservice:CerbungserviceService  
+  ){}
 
   ngOnInit() {
+  }
+
+  createStory(){
+    const latestCerbung = this.cerbungservice.getAllCerbung().pop();
+    if (latestCerbung){
+      this.cerbungservice.createStory(latestCerbung.title, this.newParagraph);
+    }
+    this.router.navigate(['/create3']);
   }
 
 }

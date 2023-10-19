@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
   selector: 'app-create',
@@ -8,28 +9,28 @@ import { Router } from '@angular/router';
 })
 export class CreatePage implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private cerbungservice: CerbungserviceService
+  ) { }
 
   ngOnInit() {
   }
 
-  options = ['Action','Horror','Sci-fi','Drama','Thriller']
+  options = ['Action', 'Horror', 'Sci-fi', 'Drama', 'Thriller']
 
   title: string = '';
   desc: string = '';
   image: string = '';
   genre: string = '';
 
-  goToPage2() {
-    this.router.navigate(['/create2'], {
-      queryParams: {
-        data: {
-          title:this.title,
-          desc:this.desc,
-          image:this.image,
-          genre:this.genre
-        }
-      },
-    });
-}
+  createCerbung() {
+    const newCerbung = {
+      title: this.title,
+      shortDesc: this.desc,
+      url: this.image,
+      genre: this.genre
+    }
+    this.cerbungservice.createCerbung(newCerbung);
+    this.router.navigate(['/create2'])
+  }
 }

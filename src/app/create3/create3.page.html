@@ -18,32 +18,42 @@
   </ion-header>
 
   <div style="width: 90%; margin: auto; margin-top: 2vh;margin-bottom: 5vh;">
-    <p *ngFor="let item of retrievedData">{{ retrievedData }}</p>
-    <ion-checkbox labelPlacement="end">I agree with the rules and policies in creating Cerbung. This includes not containing racial slurs, discrimination, religion, advertisements, and politics</ion-checkbox>
+    <div>
+      <h2>{{ cerbungs.title }}</h2>
+      <ion-card
+        style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
+        {{cerbungs.genre}}
+      </ion-card>
+      <p>{{ cerbungs.shortDesc }}</p>
+      <div style="border: 1px solid;"></div>
+      <p>{{ storys.paragraf }}</p>
+    </div>
+    <ion-checkbox labelPlacement="end">I agree with the rules and policies in creating Cerbung. This includes not
+      containing racial slurs, discrimination, religion, advertisements, and politics</ion-checkbox>
   </div>
-    
-    
-    <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
-      <ion-col size="4">
-        <ion-router-link routerLink="/create2">
-          <ion-button fill="outline" shape="round">
-            Previous
-          </ion-button>
-        </ion-router-link>
-      </ion-col>
-      <ion-col size="4" class="ion-text-center">
-        <ion-text>
-          <p>3 of 3</p>
-        </ion-text>
-      </ion-col>
-      <ion-col size="4" class="ion-text-end">
-        <ion-router-link routerLink="/home">
-          <ion-button fill="outline" shape="round">
-            Publish This Cerbung
-          </ion-button>
-        </ion-router-link>
-      </ion-col>
-    </ion-row>
-    
-    
+
+
+  <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
+    <ion-col size="4">
+      <ion-router-link routerLink="/create2">
+        <ion-button fill="outline" shape="round">
+          Previous
+        </ion-button>
+      </ion-router-link>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-text>
+        <p>3 of 3</p>
+      </ion-text>
+    </ion-col>
+    <ion-col size="4" class="ion-text-end">
+      <ion-router-link routerLink="/home">
+        <ion-button fill="outline" shape="round">
+          Publish This Cerbung
+        </ion-button>
+      </ion-router-link>
+    </ion-col>
+  </ion-row>
+
+
 </ion-content>
