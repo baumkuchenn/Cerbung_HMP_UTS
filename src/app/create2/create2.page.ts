@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Create2Page implements OnInit {
 
+  newParagraph: string = '';
+
   constructor() { }
 
   ngOnInit() {
