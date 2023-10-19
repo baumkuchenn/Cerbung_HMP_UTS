@@ -26,8 +26,8 @@
         <ion-card-subtitle>by {{ cerbung.author }}</ion-card-subtitle>
         <ion-card-subtitle>
           <ion-icon name="list-outline"></ion-icon> {{ cerbung.paragraph }}
-          <ion-icon name="thumbs-up" style="margin-left: 8px"></ion-icon> {{
-          cerbung.like }}
+          <ion-icon name="thumbs-up" style="margin-left: 8px"></ion-icon>
+          {{ cerbungservice.getLikeCount(cerbung.title) }}
         </ion-card-subtitle>
       </ion-card-header>
       <ion-card-content style="text-align: left">{{ cerbung.shortDesc }}</ion-card-content>

@@ -13,11 +13,10 @@ export class HomePage {
 
   cerbungs: any[] = [];
   search = "";
-  highestLikeCerbung: number | null = null;
   loggedInUser: string | null = null;
 
   constructor(
-    private cerbungservice: CerbungserviceService,
+    public cerbungservice: CerbungserviceService,
     private route: ActivatedRoute
     ) { }
 
@@ -26,7 +25,10 @@ export class HomePage {
       const receivedData = params.get('data');
     });
     this.loggedInUser = this.cerbungservice.getLoggedInUser();
-    this.highestLikeCerbung = this.cerbungservice.getHighestLikeCerbung();
-    this.cerbungs = this.cerbungservice.cerbungs.filter(cerbung => cerbung.like == this.highestLikeCerbung);
+    this.cerbungs = this.cerbungservice.getHighestLikeCerbung();
+    this.cerbungs.forEach((cerbung) => {
+      const totalLikes = this.cerbungservice.calculateTotalLikes(cerbung.title);
+      this.cerbungservice.setLikeCount(cerbung.title, totalLikes);
+    });
   }
 }

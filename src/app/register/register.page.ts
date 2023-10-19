@@ -30,7 +30,6 @@ export class RegisterPage implements OnInit {
         this.password = "";
         this.url = "";
         this.confPass = "";
-        this.router.navigate(['/login']);
       }
       else {
         await this.presentAlert("Password dan Konfirmasi password tidak sama.");
@@ -45,7 +44,14 @@ export class RegisterPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Pemberitahuan',
       message: message,
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/login']);
+          },
+        },
+      ],
     });
 
     await alert.present();

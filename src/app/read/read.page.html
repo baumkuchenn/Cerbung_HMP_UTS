@@ -27,7 +27,7 @@
           <div>
             <ion-icon name="list-outline"></ion-icon> {{cerbung.paragraph}}
             <ion-icon name="thumbs-up" style="margin-left: 8px"></ion-icon>
-            {{cerbung.like}}
+            {{cerbungservice.getLikeCount(cerbung.title)}}
             <ion-card
               style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
               {{cerbung.genre}}
@@ -46,8 +46,9 @@
             <ion-icon name="person-outline" style="margin-right: 8px;"></ion-icon>
             {{ story.author }}
           </div>
-          <ion-button (click)="tambahLike(cerbung.title)" style="color: white; --background: transparent;">
-            <ion-icon slot="icon-only" name="thumbs-up-outline"></ion-icon>
+          <ion-button (click)="tambahLike(story.paragraf)" style="color: white; --background: transparent;">
+            <ion-icon *ngIf="story.like === 1" name="thumbs-up"></ion-icon>
+            <ion-icon *ngIf="story.like === 0" name="thumbs-up-outline"></ion-icon>
           </ion-button>
         </div>
       </ion-card-content>
@@ -59,8 +60,8 @@
       <!-- Bagian "Submit" yang sekarang ditempatkan di dalam bagian "+ Request" -->
       <ion-card-content *ngIf="isRequestingContribute" style="text-align: justify">
         <!-- Input untuk paragraf baru -->
-        <ion-textarea label="Continue the Story" labelPlacement="floating" fill="outline" rows="5" [(ngModel)]="newParagraph" #paragraphInput
-          maxlength="70"></ion-textarea>
+        <ion-textarea label="Continue the Story" labelPlacement="floating" fill="outline" rows="5"
+          [(ngModel)]="newParagraph" #paragraphInput maxlength="70"></ion-textarea>
 
         <!-- Menampilkan penghitungan karakter -->
         <div class="character-count" style="text-align: right;">

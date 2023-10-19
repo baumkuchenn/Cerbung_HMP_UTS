@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./read.page.scss'],
 })
 export class ReadPage implements OnInit {
-  cerbungTitle: string | null = "";
+  cerbungTitle: string = "";
   cerbungs: any | null = null; // Menambahkan variabel cerbung dan menginisialisasinya sebagai null
   storys: any | null = null;
   isRequestingContribute: boolean = false;
@@ -18,7 +18,7 @@ export class ReadPage implements OnInit {
   cerbungLikes: { [title: string]: boolean } = {};
 
   constructor(
-    private cerbungservice: CerbungserviceService,
+    public cerbungservice: CerbungserviceService,
     private alertController: AlertController,
     private route: ActivatedRoute
   ) { }
@@ -30,17 +30,14 @@ export class ReadPage implements OnInit {
     });
     this.cerbungs = this.cerbungservice.cerbungs.filter(cerbung => cerbung.title == this.cerbungTitle) || null;
     this.storys = this.cerbungservice.storys.filter(story => story.cerbungTitle == this.cerbungTitle) || null;
+    const totalLikes = this.cerbungservice.calculateTotalLikes(this.cerbungTitle);
+    this.cerbungservice.setLikeCount(this.cerbungTitle, totalLikes);
   }
 
-  isLiked(cerbungTitle: string): boolean {
-    return this.cerbungLikes[cerbungTitle] || false;
-  }
-
-  tambahLike(title: string) {
-    const cerbung = this.cerbungservice.cerbungs.find(cerbung => cerbung.title === title);
-    if (cerbung) {
-      this.cerbungLikes[title] = !this.isLiked(title);
-      cerbung.like += this.isLiked(title) ? 1 : -1;
+  tambahLike(pParagraf: string) {
+    const story = this.cerbungservice.storys.find(story => story.paragraf === pParagraf);
+    if (story) {
+      story.like = 1 - story.like;
     }
   }
 
