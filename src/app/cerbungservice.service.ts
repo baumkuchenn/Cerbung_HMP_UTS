@@ -21,29 +21,29 @@
   })
   export class CerbungserviceService {
 
-    users = [
-      {
-        id: 1,
-        username: "Aldy",
-        password: "aldy123",
-        tglDibuat: new Date("2020-09-01"),
-        foto: "https://ih1.redbubble.net/image.2305889247.2663/raf,360x360,075,t,fafafa:ca443f4786.jpg"
-      },
-      {
-        id: 2,
-        username: "Oktar",
-        password: "ryan123",
-        tglDibuat: new Date("2020-08-01"),
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
-      },
-      {
-        id: 3,
-        username: "Daniel",
-        password: "daniel123",
-        tglDibuat: new Date("2020-07-01"),
-        foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
-      }
-    ];
+  users = [
+    {
+      id: 1,
+      username: "Aldy",
+      password: "aldy123",
+      tglDibuat: new Date("2020-09-01"),
+      foto: "https://ih1.redbubble.net/image.2305889247.2663/raf,360x360,075,t,fafafa:ca443f4786.jpg"
+    },
+    {
+      id: 2,
+      username: "Oktar",
+      password: "ryan123",
+      tglDibuat: new Date("2020-08-01"),
+      foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
+    },
+    {
+      id: 3,
+      username: "Daniel",
+      password: "daniel123",
+      tglDibuat: new Date("2020-07-01"),
+      foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlbPQhs3okwd7UHeVgUI7Ks0t8uKu9ZuFJdw"
+    }
+  ];
 
     cerbungs = [
       {
