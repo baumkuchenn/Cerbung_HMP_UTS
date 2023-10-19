@@ -16,4 +16,31 @@
       <ion-title size="large">create</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-input [(ngModel)]="title" label="Cerbung Title" labelPlacement="floating" placeholder="Enter text" fill="outline"
+    style="width: 90%; margin: auto; margin-top: 5vh;"></ion-input>
+  <ion-textarea [(ngModel)]="desc" label="Short Description" labelPlacement="floating" placeholder="Enter text" fill="outline" rows="10"
+    style="width: 90%; margin: auto; margin-top: 2vh;"></ion-textarea>
+  <ion-input [(ngModel)]="image" label="Cerbung Image Cover" labelPlacement="floating" placeholder="Enter text" fill="outline"
+    style="width: 90%; margin: auto; margin-top: 2vh;"></ion-input>
+  <ion-select label="Choose Genre" labelPlacement="floating" placeholder="Genres" fill="outline"
+    style="width: 90%; margin: auto; margin-top: 2vh;">
+    <ion-select-option [(ngModel)]="genre" *ngFor="let item of options" [value]="item">{{item}}</ion-select-option>
+  </ion-select>
+
+  <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
+    <ion-col size="6" offset="3" class="ion-text-center">
+      <ion-text>
+        <p>1 of 3</p>
+      </ion-text>
+    </ion-col>
+
+    <ion-col size="3" class="ion-text-end">
+        <ion-button (click)="goToPage2()" fill="outline" shape="round">
+          Next
+        </ion-button>
+    </ion-col>
+  </ion-row>
+
+
 </ion-content>

@@ -38,7 +38,17 @@ const routes: Routes = [
   {
     path: 'pref',
     loadChildren: () => import('./pref/pref.module').then( m => m.PrefPageModule)
-  },  {
+  },
+  {
+    path: 'create2',
+    loadChildren: () => import('./create2/create2.module').then( m => m.Create2PageModule)
+  },
+  {
+    path: 'create3',
+    loadChildren: () => import('./create3/create3.module').then( m => m.Create3PageModule)
+  },
+
+  {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
