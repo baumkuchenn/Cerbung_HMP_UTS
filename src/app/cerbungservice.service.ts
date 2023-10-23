@@ -283,7 +283,13 @@ export class CerbungserviceService {
   getAllCerbung(): any[] {
     return this.cerbungs;
   }
-
+  countCerbung(author:string):number{
+    let result=0;
+    for(let i of this.cerbungs){
+      if(i.author==author){result++;}
+    }
+    return result;
+  }
 
   // DISPLAY
   getCerbungDanStory(): CerbungDanStory[] {
