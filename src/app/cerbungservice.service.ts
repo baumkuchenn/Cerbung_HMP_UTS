@@ -202,6 +202,20 @@ export class CerbungserviceService {
     return !!user;
   }
 
+  cekUsername(pUsername: string) {
+      const user = this.users.find(u => u.username === pUsername );
+      return user;
+    }
+    cekPassword(pPassword: string) {
+      if (this.loggedInUser) {
+        const user = this.users.find(u => u.username === this.loggedInUser && u.password === pPassword);
+        if (user) {
+          return user
+        }
+      }
+      return null;
+    }
+    
   getLoggedInUser(): string | null {
     return this.loggedInUser;
   }

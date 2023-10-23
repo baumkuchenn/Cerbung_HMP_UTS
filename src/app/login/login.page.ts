@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CerbungserviceService } from '../cerbungservice.service';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,42 +8,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  username = "";
-  password = "";
+  username: any; // inisialisasi awal
+  password: any;
 
   constructor(
     private cerbungService: CerbungserviceService,
     private alertController: AlertController,
-    private router: Router
+
   ) { }
 
   ngOnInit() {
   }
 
-  sendData() {
-    const dataToSend = this.username;
-    this.router.navigate(['/home', { user: dataToSend }]);
-  }
-
   async BtnLogin_OnClick() {
-    const login = this.cerbungService.CekLogin(this.username, this.password);
-    if (login) {
-      this.username = "";
-      this.password = "";
-    }
-    else {
-      await this.presentAlert();
+    if (this.username && this.password) {
+      const login = this.cerbungService.CekLogin(this.username, this.password);
+      if (login) {
+        this.username = ""; // pengosongan ini berguna untuk mengosongkan nilai variabel
+        this.password = ""; //menjadi string kosong sehingga pengguna dapat memasukkan nama pengguna yang berbeda jika mereka ingin masuk kembali.
+      } else {
+        await this.presentAlert('Username atau password salah.');
+      }
+    } else {
+      await this.presentAlert('Masukan Username dan Password.');
     }
   }
 
-  async presentAlert() {
+  async presentAlert(message: string) {
     const alert = await this.alertController.create({
       header: 'Sign in Gagal',
-      message: 'Username atau password salah.',
+      message: message,
       buttons: ['OK']
     });
 
     await alert.present();
   }
 }
+

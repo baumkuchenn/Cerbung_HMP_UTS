@@ -1,27 +1,42 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Sign in</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">sign in</ion-title>
     </ion-toolbar>
   </ion-header>
-  <h1 style="text-align: center; margin-top: 10vh;">Sign In</h1>
-  <h3 style="text-align: center;">Selamat datang di Cerbung: Cerita Bersambung</h3>
-  <ion-input label="Username : " labelPlacement="floating" fill="outline" [(ngModel)]="username"
-    style="width: 90%; margin: auto; margin-top: 10vh;"></ion-input>
-  <ion-input label="Password : " labelPlacement="floating" fill="outline" type="password" [(ngModel)]="password"
-    style="width: 90%; margin: auto; margin-top: 3vh;"></ion-input>
-  <ion-button id="btnLogin" expand="block" (click)="BtnLogin_OnClick()"
-    style="width: 90%; margin: auto; margin-top: 3vh;">Sign In</ion-button>
-  <div style="margin-top: 3vh; text-align: center;">
+  <h1 style="text-align: center; margin-top: 10vh">Sign In</h1>
+  <h3 style="text-align: center">
+    Selamat datang di Cerbung: Cerita Bersambung
+  </h3>
+  <ion-input
+    label="Username : "
+    labelPlacement="floating"
+    fill="outline"
+    [(ngModel)]="username"
+    style="width: 90%; margin: auto; margin-top: 10vh"
+  ></ion-input>
+  <ion-input
+    label="Password : "
+    labelPlacement="floating"
+    fill="outline"
+    type="password"
+    [(ngModel)]="password"
+    style="width: 90%; margin: auto; margin-top: 3vh"
+  ></ion-input>
+  <ion-button
+    id="btnLogin"
+    expand="block"
+    (click)="BtnLogin_OnClick()"
+    style="width: 90%; margin: auto; margin-top: 3vh"
+    >Sign In</ion-button
+  >
+  <div style="margin-top: 3vh; text-align: center">
     <ion-text>
       Belum punya akun?
-      <ion-router-link routerLink="/register" style="color: cyan; text-decoration: underline;">
+      <ion-router-link
+        routerLink="/register"
+        style="color: cyan; text-decoration: underline"
+      >
         Sign up
       </ion-router-link>
     </ion-text>
