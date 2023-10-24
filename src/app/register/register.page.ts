@@ -27,16 +27,32 @@ export class RegisterPage implements OnInit {
   async BtnRegister_OnClick() {
     if (this.username !== "" && this.password !== "" && this.confPass !== "" && this.url !== "") {
       if (this.password === this.confPass) {
-        const cekUser = this.cerbungService.cekUsername(this.username);
-        if (!cekUser) {
-          await this.presentAlert("Sign Up berhasil.");
-          this.username = "";
-          this.password = "";
-          this.url = "";
-          this.confPass = "";
-          this.router.navigate(['/login']);
+        const cekUser=this.cerbungService.cekUsername(this.username);
+        if(!cekUser){
+
+        const newUser = {
+          id: this.cerbungService.users.length + 1, // Berikan ID unik
+          username: this.username,
+          password: this.password,
+          tglDibuat: new Date(),
+          foto: this.url,
+        };
+        
+
+        this.cerbungService.users.push(newUser);
+
+
+        await this.presentAlert("Sign Up berhasil.");
+
+
+        this.username = "";
+        this.password = "";
+        this.url = "";
+        this.confPass = "";
+
+        this.router.navigate(['/login']);
         }
-        else {
+        else{
           await this.presentAlert("Username sudah terpakai.");
         }
       }
