@@ -27,8 +27,8 @@ export class RegisterPage implements OnInit {
   async BtnRegister_OnClick() {
     if (this.username !== "" && this.password !== "" && this.confPass !== "" && this.url !== "") {
       if (this.password === this.confPass) {
-        const cekUser=this.cerbungService.cekUsername(this.username);
-        if(!cekUser){
+        const cekUser = this.cerbungService.cekUsername(this.username);
+        if (!cekUser) {
           await this.presentAlert("Sign Up berhasil.");
           this.username = "";
           this.password = "";
@@ -36,7 +36,7 @@ export class RegisterPage implements OnInit {
           this.confPass = "";
           this.router.navigate(['/login']);
         }
-        else{
+        else {
           await this.presentAlert("Username sudah terpakai.");
         }
       }

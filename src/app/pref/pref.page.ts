@@ -32,11 +32,11 @@ export class PrefPage implements OnInit {
   async BtnChangePass_OnClick() {
     if (this.oldPass !== "" && this.newPass !== "" && this.confNewPass !== "") {
       if (this.newPass === this.confNewPass) {
-        const cekOldpassword =this.cerbungservice.cekPassword(this.oldPass) 
-        if(cekOldpassword){
+        const cekOldpassword = this.cerbungservice.cekPassword(this.oldPass)
+        if (cekOldpassword) {
           await this.presentOkAlert("Ganti password berhasil.");
         }
-        else{
+        else {
           await this.presentOkAlert("Old Password lama salah.");
         }
       }

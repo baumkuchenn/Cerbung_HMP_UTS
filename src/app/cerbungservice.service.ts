@@ -1,21 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-interface CerbungDanStory {
-  title: string;
-  author: string;
-  url: string;
-  newestTglUpdate: Date;
-}
-
-interface UserDanStory {
-  username: string;
-  newestTglUpdate: Date;
-  totalLike: number;
-  foto: string;
-  tglDibuat: Date;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -190,9 +175,7 @@ export class CerbungserviceService {
 
   constructor(private router: Router) { }
 
-  addCerbung(pTitle: string, pGenre: string, pAuthor: string, tglRilis: Date, pLike: number, pParagraph: number, pShortDesc: string) {
-    this.cerbungs.push()
-  }
+  //USER
   CekLogin(pUsername: string, pPassword: string) {
     const user = this.users.find(u => u.username === pUsername && u.password === pPassword);
     if (user) {
@@ -203,19 +186,20 @@ export class CerbungserviceService {
   }
 
   cekUsername(pUsername: string) {
-      const user = this.users.find(u => u.username === pUsername );
-      return user;
-    }
-    cekPassword(pPassword: string) {
-      if (this.loggedInUser) {
-        const user = this.users.find(u => u.username === this.loggedInUser && u.password === pPassword);
-        if (user) {
-          return user
-        }
+    const user = this.users.find(u => u.username === pUsername);
+    return user;
+  }
+  
+  cekPassword(pPassword: string) {
+    if (this.loggedInUser) {
+      const user = this.users.find(u => u.username === this.loggedInUser && u.password === pPassword);
+      if (user) {
+        return user
       }
-      return null;
     }
-    
+    return null;
+  }
+
   getLoggedInUser(): string | null {
     return this.loggedInUser;
   }
@@ -235,6 +219,10 @@ export class CerbungserviceService {
 
 
   // CERITA
+  addCerbung(pTitle: string, pGenre: string, pAuthor: string, tglRilis: Date, pLike: number, pParagraph: number, pShortDesc: string) {
+    this.cerbungs.push()
+  }
+
   calculateTotalLikes(cerbungTitle: string): number {
     const relatedStories = this.storys.filter((story) => story.cerbungTitle === cerbungTitle);
     return relatedStories.reduce((totalLikes, story) => totalLikes + story.like, 0);
@@ -242,7 +230,7 @@ export class CerbungserviceService {
 
   getHighestLikeCerbung(): any[] {
     let cerbungsWithHighestLikes: any[] = [];
-    let highestLikes = -1;
+    let highestLikes = -1; //Karena ada cerbung yang likenya 0
 
     // Cari jumlah like terbanyak
     this.cerbungs.forEach((cerbung) => {
@@ -267,10 +255,6 @@ export class CerbungserviceService {
     return this.cerbungLikes.get(cerbungTitle) || 0;
   }
 
-  getAllLikeCounts(): Map<string, number> {
-    return this.cerbungLikes;
-  }
-
   createCerbung(newCerbung: any): void {
     newCerbung.id = this.cerbungs.length + 1;
     newCerbung.tglRilis = new Date();
@@ -279,14 +263,14 @@ export class CerbungserviceService {
 
   createStory(cerbungTitle: string, paragraf: string) {
     const newStory: any = {
+      id: this.storys.length + 1,
       cerbungTitle: cerbungTitle,
-      paragraf: paragraf,
+      author: this.loggedInUser,
+      tglUpdate: new Date(),
+      like: 0,
+      paragraf: paragraf
     };
     this.storys.push(newStory);
-  }
-
-  getCerbungById(cerbungId: number): any | undefined {
-    return this.cerbungs.find((cerbung) => cerbung.id === cerbungId);
   }
 
   getStoryByCerbung(cerbungTitle: string): string | undefined {
@@ -294,31 +278,20 @@ export class CerbungserviceService {
     return storyItem?.paragraf;
   }
 
-  getAllCerbung(): any[] {
-    return this.cerbungs;
-  }
-  countCerbung(author:string):number{
-    let result=0;
-    for(let i of this.cerbungs){
-      if(i.author==author){result++;}
-    }
-    return result;
-  }
-
   // DISPLAY
-  getCerbungDanStory(): CerbungDanStory[] {
+  getCerbungDanStory(): any[] {
     // Untuk menyimpan tglUpdate terbaru u/ setiap cerbung
     const newestTglUpdatesMap = new Map<string, Date>();
     // Untuk mencari tglUpdate terbaru u/ setiap cerbung
     this.storys.forEach(story => {
       const currentNewestTglUpdate = newestTglUpdatesMap.get(story.cerbungTitle);
-
+      //Jika undefined atau story.tglUpdatenya lebih baru
       if (!currentNewestTglUpdate || story.tglUpdate > currentNewestTglUpdate) {
         newestTglUpdatesMap.set(story.cerbungTitle, story.tglUpdate);
       }
     });
     // Menggabungkan dari array cerbung dan tglUpdateTerbaru dari map sebelumnya
-    const combinedInfo: CerbungDanStory[] = this.cerbungs
+    const combinedInfo: any[] = this.cerbungs
       .filter(cerbung => cerbung.author !== this.loggedInUser) // Filter supaya tidak menampilkan cerita author yg login
       .map(cerbung => {
         const newestTglUpdate = newestTglUpdatesMap.get(cerbung.title) || cerbung.tglRilis;
@@ -336,13 +309,11 @@ export class CerbungserviceService {
     return combinedInfo;
   }
 
-  getUserDanStory(): UserDanStory[] {
+  getUserDanStory(): any[] {
     // Simpan tanggal update terbaru
     const newestTglUpdatesMap = new Map<string, Date>();
     // Simpan total like setiap user
     const totalLikesMap = new Map<string, number>();
-    // Simpan cerbung yang dibuat user
-    const cerbungsByUserMap = new Map<string, any[]>();
 
     // Cari tgl update terbaru untuk setiap user
     this.storys.forEach(story => {
@@ -351,19 +322,15 @@ export class CerbungserviceService {
         newestTglUpdatesMap.set(story.author, story.tglUpdate);
       }
     });
+    // Cari total like setiap user berdasarkan paragraf yg dibuat
     this.storys.forEach(story => {
-      // Update cerbungsByUserMap
-      const cerbungsByUser = cerbungsByUserMap.get(story.author) || [];
-      cerbungsByUser.push(story);
-      cerbungsByUserMap.set(story.author, cerbungsByUser);
-
       // Update totalLikesMap
       const currentTotalLikes = totalLikesMap.get(story.author) || 0;
-      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0)); // Assuming each story is one like
+      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0)); 
     });
 
-    // Combine information from users, cerbungs, and tglUpdate from the map
-    const combinedInfo: UserDanStory[] = this.users
+    // Simpan informasi gabungan pakai map
+    const combinedInfo: any[] = this.users
       .filter(user => user.username !== this.loggedInUser)
       .map(user => {
         const newestTglUpdate = newestTglUpdatesMap.get(user.username) || user.tglDibuat;
@@ -384,34 +351,28 @@ export class CerbungserviceService {
     return combinedInfo;
   }
 
-  getUserDanStorySemua(): UserDanStory[] {
-    // To store the newest tglUpdate for each user
+  getUserDanStorySemua(): any[] {
+    // Simpan tanggal update terbaru
     const newestTglUpdatesMap = new Map<string, Date>();
-    // To store the total like for each user
+    // Simpan total like setiap user
     const totalLikesMap = new Map<string, number>();
-    // Simpan cerbung yang dibuat user
-    const cerbungsByUserMap = new Map<string, any[]>();
 
-    // Find the newest tglUpdate for each user from the storys array
+    // Cari tgl update terbaru untuk setiap user
     this.storys.forEach(story => {
       const currentNewestTglUpdate = newestTglUpdatesMap.get(story.author);
       if (!currentNewestTglUpdate || story.tglUpdate > currentNewestTglUpdate) {
         newestTglUpdatesMap.set(story.author, story.tglUpdate);
       }
     });
+    // Cari total like setiap user berdasarkan paragraf yg dibuat
     this.storys.forEach(story => {
-      // Update cerbungsByUserMap
-      const cerbungsByUser = cerbungsByUserMap.get(story.author) || [];
-      cerbungsByUser.push(story);
-      cerbungsByUserMap.set(story.author, cerbungsByUser);
-
       // Update totalLikesMap
       const currentTotalLikes = totalLikesMap.get(story.author) || 0;
-      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0)); // Assuming each story is one like
+      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0)); 
     });
 
-    // Combine information from users, cerbungs, and tglUpdate from the map
-    const combinedInfo: UserDanStory[] = this.users
+    // Simpan informasi gabungan pakai map
+    const combinedInfo: any[] = this.users
       .map(user => {
         const newestTglUpdate = newestTglUpdatesMap.get(user.username) || user.tglDibuat;
         const totalLike = totalLikesMap.get(user.username) || 0;

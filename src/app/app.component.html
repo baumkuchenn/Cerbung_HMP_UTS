@@ -20,27 +20,32 @@
   <ion-tabs>
     <ion-tab-bar *ngIf="!isLoginAndRegisterPage()" slot="bottom">
       <ion-tab-button tab="home">
-        <ion-icon name="home-outline"></ion-icon>
+        <ion-icon *ngIf="isHome()" name="home"></ion-icon>
+        <ion-icon *ngIf="!isHome()" name="home-outline"></ion-icon>
         <ion-label>Home</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="following">
-        <ion-icon name="book-outline"></ion-icon>
+        <ion-icon *ngIf="isFollowing()" name="book"></ion-icon>
+        <ion-icon *ngIf="!isFollowing()" name="book-outline"></ion-icon>
         <ion-label>Following</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="create">
-        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+        <ion-icon *ngIf="isCreate()" name="chatbubble-ellipses"></ion-icon>
+        <ion-icon *ngIf="!isCreate()" name="chatbubble-ellipses-outline"></ion-icon>
         <ion-label>Create</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="users">
-        <ion-icon name="people-outline"></ion-icon>
+        <ion-icon *ngIf="isUser()" name="people"></ion-icon>
+        <ion-icon *ngIf="!isUser()" name="people-outline"></ion-icon>
         <ion-label>Users</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="pref">
-        <ion-icon name="settings-outline"></ion-icon>
+        <ion-icon *ngIf="isPref()" name="settings"></ion-icon>
+        <ion-icon *ngIf="!isPref()" name="settings-outline"></ion-icon>
         <ion-label>Pref</ion-label>
       </ion-tab-button>
     </ion-tab-bar>

@@ -18,20 +18,9 @@
   </ion-header>
 
   <div style="margin: 2vh">
-    <ion-input
-      label="Search Cerbung"
-      labelPlacement="floating"
-      [(ngModel)]="search"
-      fill="outline"
-    ></ion-input>
-    <ion-card
-      *ngFor="let cerbung of cerbungs"
-      style="border: 1px solid #ffffff; border-radius: 12px; margin-top: 2vh"
-    >
-      <img
-        [src]="cerbung.url"
-        style="height: 32vh; width: 100%; display: block; object-fit: cover"
-      />
+    <ion-input label="Search Cerbung" labelPlacement="floating" [(ngModel)]="search" fill="outline"></ion-input>
+    <ion-card *ngFor="let cerbung of cerbungs" style="border: 1px solid #ffffff; border-radius: 12px; margin-top: 2vh">
+      <img [src]="cerbung.url" style="height: 32vh; width: 100%; display: block; object-fit: cover" />
       <ion-card-header style="text-align: left">
         <ion-card-title>{{ cerbung.title }}</ion-card-title>
         <ion-card-subtitle>by {{ cerbung.author }}</ion-card-subtitle>
@@ -41,15 +30,9 @@
           {{ cerbungservice.getLikeCount(cerbung.title) }}
         </ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content style="text-align: left"
-        >{{ cerbung.shortDesc }}</ion-card-content
-      >
-      <ion-button
-        shape="round"
-        style="float: right; margin-right: 3vh; margin-bottom: 3vh"
-        [routerLink]="['/read', cerbung.title]"
-        >Read</ion-button
-      >
+      <ion-card-content style="text-align: left">{{ cerbung.shortDesc }}</ion-card-content>
+      <ion-button shape="round" style="float: right; margin-right: 3vh; margin-bottom: 3vh"
+        [routerLink]="['/read', cerbung.title]">Read</ion-button>
     </ion-card>
   </div>
 </ion-content>
