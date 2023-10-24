@@ -29,6 +29,8 @@ export class HomePage {
     this.cerbungs.forEach((cerbung) => {
       const totalLikes = this.cerbungservice.calculateTotalLikes(cerbung.title);
       this.cerbungservice.setLikeCount(cerbung.title, totalLikes);
+      const totalParagraf = this.cerbungservice.caluclateParagraf(cerbung.title);
+      this.cerbungservice.setParagrafVount(cerbung.title, totalParagraf);
     });
   }
 }

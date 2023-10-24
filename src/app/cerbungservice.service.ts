@@ -37,7 +37,6 @@ export class CerbungserviceService {
       genre: "Romance",
       author: "Aldy",
       tglRilis: new Date("2020-09-20"),
-      paragraph: 4,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum faucibus consequat. Maecenas id mi quis leo elementum blandit. Duis tristique quam eget ligula pharetra, varius iaculis neque commodo. Nunc tempus eros massa. Nulla tristique vulputate turpis, sit amet sodales arcu iaculis eget. Ut eu lectus auctor, lobortis lacus in, malesuada tortor. Nunc fringilla mi ut tortor malesuada, eu efficitur sapien fringilla. Sed consequat augue id tortor luctus, nec tincidunt est dictum."
     },
@@ -47,7 +46,6 @@ export class CerbungserviceService {
       genre: "Misteri",
       author: "Oktar",
       tglRilis: new Date("2020-09-13"),
-      paragraph: 3,
       url: "https://all-things-andy-gavin.com/wp-content/uploads/2013/10/gravity-movie.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque aliquam odio sit amet augue semper, maximus mattis justo aliquet. Aliquam consequat mi mauris, eget posuere nunc suscipit et. Suspendisse eget tortor facilisis, dictum arcu eget, congue ipsum. Donec gravida neque nec dolor commodo malesuada. Aenean porttitor facilisis arcu, eget sodales lorem tincidunt vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;"
     },
@@ -57,7 +55,6 @@ export class CerbungserviceService {
       genre: "Comedy",
       author: "Aldy",
       tglRilis: new Date("2020-09-06"),
-      paragraph: 1,
       url: "https://www.willitsnews.com/wp-content/uploads/migration/2017/201706/NEWS_170609993_AR_0_RALMFSWTQIMI.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a leo non tortor accumsan maximus. Vestibulum orci eros, venenatis ac sem eu, auctor tristique turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum felis sit amet accumsan lobortis. Pellentesque sem ipsum, mollis eu leo et, blandit ultricies nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
     },
@@ -67,7 +64,6 @@ export class CerbungserviceService {
       genre: "Romance",
       author: "Oktar",
       tglRilis: new Date("2020-08-23"),
-      paragraph: 2,
       url: "https://live.staticflickr.com/737/32640476365_906f64ce29_b.jpg",
       shortDesc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a leo non tortor accumsan maximus. Vestibulum orci eros, venenatis ac sem eu, auctor tristique turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vestibulum felis sit amet accumsan lobortis. Pellentesque sem ipsum, mollis eu leo et, blandit ultricies nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris rutrum efficitur tortor at lacinia."
     }
@@ -172,6 +168,7 @@ export class CerbungserviceService {
   // DATA MEMBER
   private loggedInUser: string | null = null;
   private cerbungLikes: Map<string, number> = new Map();
+  private cerbungParagraf: Map<string, number> = new Map();
 
   constructor(private router: Router) { }
 
@@ -219,8 +216,27 @@ export class CerbungserviceService {
 
 
   // CERITA
-  addCerbung(pTitle: string, pGenre: string, pAuthor: string, tglRilis: Date, pLike: number, pParagraph: number, pShortDesc: string) {
-    this.cerbungs.push()
+  createCerbung(newCerbung: any): void {
+    newCerbung.id = this.cerbungs.length + 1;
+    newCerbung.tglRilis = new Date();
+    this.cerbungs.push(newCerbung);
+  }
+
+  createStory(cerbungTitle: string, paragraf: string) {
+    const newStory: any = {
+      id: this.storys.length + 1,
+      cerbungTitle: cerbungTitle,
+      author: this.loggedInUser,
+      tglUpdate: new Date(),
+      like: 0,
+      paragraf: paragraf
+    };
+    this.storys.push(newStory);
+  }
+
+  caluclateParagraf(cerbungTitle: string): number {
+    const relatedStories = this.storys.filter((story) => story.cerbungTitle === cerbungTitle);
+    return relatedStories.length;
   }
 
   calculateTotalLikes(cerbungTitle: string): number {
@@ -255,28 +271,19 @@ export class CerbungserviceService {
     return this.cerbungLikes.get(cerbungTitle) || 0;
   }
 
-  createCerbung(newCerbung: any): void {
-    newCerbung.id = this.cerbungs.length + 1;
-    newCerbung.tglRilis = new Date();
-    this.cerbungs.push(newCerbung);
+  setParagrafVount(cerbungTitle: string, paragrafCount: number) {
+    this.cerbungParagraf.set(cerbungTitle, paragrafCount);
   }
 
-  createStory(cerbungTitle: string, paragraf: string) {
-    const newStory: any = {
-      id: this.storys.length + 1,
-      cerbungTitle: cerbungTitle,
-      author: this.loggedInUser,
-      tglUpdate: new Date(),
-      like: 0,
-      paragraf: paragraf
-    };
-    this.storys.push(newStory);
+  getParagrafCount(cerbungTitle: string): number {
+    return this.cerbungParagraf.get(cerbungTitle) || 0;
   }
 
   getStoryByCerbung(cerbungTitle: string): string | undefined {
     const storyItem = this.storys.find((story) => story.cerbungTitle === cerbungTitle);
     return storyItem?.paragraf;
   }
+
 
   // DISPLAY
   getCerbungDanStory(): any[] {
