@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CerbungserviceService } from '../cerbungservice.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,30 +9,41 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  username: any; // inisialisasi awal
+  id: any;// inisialisasi awal
+  username: any; 
   password: any;
+  url:any;
+
 
   constructor(
     private cerbungService: CerbungserviceService,
     private alertController: AlertController,
-
+    private router:Router
   ) { }
 
   ngOnInit() {
   }
 
   async BtnLogin_OnClick() {
-    if (this.username && this.password) {
-      const login = this.cerbungService.CekLogin(this.username, this.password);
-      if (login) {
-        this.username = ""; // pengosongan ini berguna untuk mengosongkan nilai variabel
-        this.password = ""; //menjadi string kosong sehingga pengguna dapat memasukkan nama pengguna yang berbeda jika mereka ingin masuk kembali.
-      } else {
-        await this.presentAlert('Username atau password salah.');
+     //pemanggilan function login di ts 
+     this.cerbungService.login(this.username,this.password).subscribe(
+      (response:any)=>{
+        if (response.result === 'success') {
+          alert('success');
+      
+          // Setelah sukses, masukkan ID pengguna ke dalam localStorage
+          this.id = response.data.id
+          this.url = response.data.url_foto
+          localStorage.setItem('app_id', this.id);
+          localStorage.setItem('app_username', this.username);
+          localStorage.setItem('app_url_foto', this.url);
+
+          this.router.navigate(['/home']);
+        } else {
+            alert(response.message);
+        }      
       }
-    } else {
-      await this.presentAlert('Masukan Username dan Password.');
-    }
+    )
   }
 
   async presentAlert(message: string) {

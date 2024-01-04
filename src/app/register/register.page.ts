@@ -13,7 +13,8 @@ export class RegisterPage implements OnInit {
   username = "";
   password = "";
   url = "";
-  confPass = "";
+  confPass = "";  
+
 
   constructor(
     private cerbungService: CerbungserviceService,
@@ -27,34 +28,19 @@ export class RegisterPage implements OnInit {
   async BtnRegister_OnClick() {
     if (this.username !== "" && this.password !== "" && this.confPass !== "" && this.url !== "") {
       if (this.password === this.confPass) {
-        const cekUser=this.cerbungService.cekUsername(this.username);
-        if(!cekUser){
 
-        const newUser = {
-          id: this.cerbungService.users.length + 1, // Berikan ID unik
-          username: this.username,
-          password: this.password,
-          tglDibuat: new Date(),
-          foto: this.url,
-        };
-        
-
-        this.cerbungService.users.push(newUser);
-
-
-        await this.presentAlert("Sign Up berhasil.");
-
-
-        this.username = "";
-        this.password = "";
-        this.url = "";
-        this.confPass = "";
-
-        this.router.navigate(['/login']);
-        }
-        else{
-          await this.presentAlert("Username sudah terpakai.");
-        }
+        this.cerbungService.regis(this.username,this.password,this.url).subscribe(
+          (response:any)=>{
+            console.log('Response:', response);
+            if (response.result === 'Success') {
+              alert('Registration successful');
+              
+              this.router.navigate(['/login']);
+            } else {
+                alert(response.message);
+            }      
+          }
+        )
       }
       else {
         await this.presentAlert("Password dan Konfirmasi password tidak sama.");
