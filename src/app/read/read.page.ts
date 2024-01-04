@@ -11,11 +11,6 @@ import { AlertController } from '@ionic/angular';
 export class ReadPage implements OnInit {
 
   id: string = "";
-  title: string = "";
-  tgl_rilis: string = "";
-  url_foto: string = "";
-  access: string = ""
-
   cerita: any[] = [];
 
   cerbungs: any | null = null; // Menambahkan variabel cerbung dan menginisialisasinya sebagai null
@@ -32,22 +27,26 @@ export class ReadPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id')!;
-      this.title = params.get('title')!;
-      this.tgl_rilis = params.get('tgl_rilis')!;
-      this.url_foto = params.get('url_foto')!;
-      this.access = params.get('access')!;
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
     });
-    this.cerbungservice.getData(this.id).subscribe(
-      (data: any) => {
-        if (data && data.result === 'OK') {
-          this.cerita = data.data
-        } else {
-          console.log('No data found');
-        }
-      },
-    );
+    this.cerbungservice.getDetailCerita(this.id).subscribe(
+      (result) => {
+        this.cerbungservice.getData(this.id).subscribe(
+          (data: any) => {
+            if (data && data.result === 'OK') {
+              const combinedData = {
+                cerita: result,
+                additionalData: data.data // Assuming your response structure
+              };
+              console.log(combinedData);
+              this.cerita.push(combinedData);
+            } else {
+              console.log('No data found');
+            }
+          },
+        );
+      });
   }
 
   tambahLike(pParagraf: string) {

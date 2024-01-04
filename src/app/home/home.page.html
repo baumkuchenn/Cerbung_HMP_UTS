@@ -32,13 +32,7 @@
       </ion-card-header>
       <ion-card-content style="text-align: left">{{ item.cerita.shortdesc }}</ion-card-content>
       <ion-button shape="round" style="float: right; margin-right: 3vh; margin-bottom: 3vh"
-        [routerLink]="['/read', { 
-          id: item.cerita.id, 
-          url_foto: item.cerita.url_foto, 
-          title: item.cerita.title, 
-          tgl_rilis: item.cerita.tgl_rilis, 
-          access: item.cerita.access 
-        }]">Read</ion-button>
+        [routerLink]="['/read', item.cerita.id]">Read</ion-button>
     </ion-card>
   </div>
 </ion-content>

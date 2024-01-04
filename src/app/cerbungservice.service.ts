@@ -235,6 +235,15 @@ export class CerbungserviceService {
     return this.http.get("https://ubaya.me/hybrid/160721029/get_cerita.php?key=" + key);
   }
 
+  getDetailCerita(pIdCerita: string){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idCerita', pIdCerita);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/get_detail_cerita.php", urlEncodedData, { headers });
+  }
+
   getData(pIdCerita: string){
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();

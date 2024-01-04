@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./following/following.module').then( m => m.FollowingPageModule)
   },
   {
-    path: 'read/:title', // Menentukan parameter title di URL
+    path: 'read/:id', // Menentukan parameter title di URL
     loadChildren: () => import('./read/read.module').then( m => m.ReadPageModule)
   },
   {
