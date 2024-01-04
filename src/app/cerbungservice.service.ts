@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -169,32 +170,43 @@ export class CerbungserviceService {
   private loggedInUser: string | null = null;
   private cerbungLikes: Map<string, number> = new Map();
   private cerbungParagraf: Map<string, number> = new Map();
+  
 
-  constructor(private router: Router) { }
+
+  constructor(private http:HttpClient,private router:Router) { }
 
   //USER
-  CekLogin(pUsername: string, pPassword: string) {
-    const user = this.users.find(u => u.username === pUsername && u.password === pPassword);
-    if (user) {
-      this.loggedInUser = pUsername;
-      this.router.navigate(['/home']);
-    }
-    return !!user;
+
+  login(p_username:string,p_password:string)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('username', p_username); 
+    body.set('password', p_password); 
+    const urlEncodedData = body.toString();
+    return this.http.post("https://ubaya.me/hybrid/160721029/cerbung/login.php", urlEncodedData, { headers });
   }
 
-  cekUsername(pUsername: string) {
-    const user = this.users.find(u => u.username === pUsername);
-    return user;
+  regis(p_username:string,p_password:string,p_foto:string)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('username', p_username); 
+    body.set('password', p_password); 
+    body.set('foto', p_foto); 
+    const urlEncodedData = body.toString();
+    return this.http.post("https://ubaya.me/hybrid/160721029/cerbung/regis.php", urlEncodedData, { headers });
   }
-  
-  cekPassword(pPassword: string) {
-    if (this.loggedInUser) {
-      const user = this.users.find(u => u.username === this.loggedInUser && u.password === pPassword);
-      if (user) {
-        return user
-      }
-    }
-    return null;
+
+  changePass(p_id:string,p_newpassword:string,p_oldpassword:string)
+  {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idUsers', p_id); 
+    body.set('old_password', p_oldpassword); 
+    body.set('new_password', p_newpassword); 
+    const urlEncodedData = body.toString();
+    return this.http.post("https://ubaya.me/hybrid/160721029/cerbung/change_pass.php", urlEncodedData, { headers });
   }
 
   getLoggedInUser(): string | null {
