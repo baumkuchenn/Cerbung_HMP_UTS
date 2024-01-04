@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -170,16 +172,17 @@ export class CerbungserviceService {
   private cerbungLikes: Map<string, number> = new Map();
   private cerbungParagraf: Map<string, number> = new Map();
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   //USER
   CekLogin(pUsername: string, pPassword: string) {
-    const user = this.users.find(u => u.username === pUsername && u.password === pPassword);
-    if (user) {
-      this.loggedInUser = pUsername;
-      this.router.navigate(['/home']);
-    }
-    return !!user;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('username', pUsername);
+    body.set('password', pPassword);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/login.php", urlEncodedData, { headers });
   }
 
   cekUsername(pUsername: string) {
@@ -216,6 +219,23 @@ export class CerbungserviceService {
 
 
   // CERITA
+  getCerita(): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/get_cerita.php");
+  }
+
+  getCeritaSearch(key: string): Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160721029/get_cerita.php?key=" + key);
+  }
+
+  getData(pIdCerita: string){
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idCerita', pIdCerita);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/get_data.php", urlEncodedData, { headers });
+  }
+
   createCerbung(newCerbung: any): void {
     newCerbung.id = this.cerbungs.length + 1;
     newCerbung.tglRilis = new Date();

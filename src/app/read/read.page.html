@@ -37,11 +37,11 @@
                 width: fit-content;
                 margin: 1vh 0;
               ">
-              {{cerbung.genre}}
+              {{cerita[0].genre}}
             </ion-card>
           </div>
           <div style="display: flex; justify-content: space-between">
-            <label>by {{cerbung.author}}</label>
+            <label>by {{cerita[0].username}}</label>
             <label>{{ cerbung.tglRilis | date:'dd/MM/yyyy'}}</label>
           </div>
         </ion-card-subtitle>

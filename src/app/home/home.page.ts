@@ -11,26 +11,57 @@ import { ActivatedRoute } from '@angular/router';
 
 export class HomePage {
 
-  cerbungs: any[] = [];
+  cerita: any[] = [];
   search = "";
-  loggedInUser: string | null = null;
 
   constructor(
     public cerbungservice: CerbungserviceService,
     private route: ActivatedRoute
-    ) { }
+  ) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const receivedData = params.get('data');
-    });
-    this.loggedInUser = this.cerbungservice.getLoggedInUser();
-    this.cerbungs = this.cerbungservice.getHighestLikeCerbung();
-    this.cerbungs.forEach((cerbung) => {
-      const totalLikes = this.cerbungservice.calculateTotalLikes(cerbung.title);
-      this.cerbungservice.setLikeCount(cerbung.title, totalLikes);
-      const totalParagraf = this.cerbungservice.caluclateParagraf(cerbung.title);
-      this.cerbungservice.setParagrafVount(cerbung.title, totalParagraf);
-    });
+    this.cerbungservice.getCerita().subscribe(
+      (cerita: any[]) => {
+        cerita.forEach((ceritaItem) => {
+          this.cerbungservice.getData(ceritaItem.id).subscribe(
+            (data: any) => {
+              if (data && data.result === 'OK') {
+                const combinedData = {
+                  cerita: ceritaItem,
+                  additionalData: data.data // Assuming your response structure
+                };
+                this.cerita.push(combinedData);
+              } else {
+                console.log('No data found');
+              }
+            },
+          );
+        });
+      }
+    );
   }
+
+  // searchCerita() {
+  //   if (this.search.trim() !== '') {
+  //     this.cerbungservice.getCeritaSearch(this.search).subscribe(
+  //       (cerita: any[]) => {
+  //         cerita.forEach((ceritaItem) => {
+  //           this.cerbungservice.getData(ceritaItem.id).subscribe(
+  //             (data: any) => {
+  //               if (data && data.result === 'OK') {
+  //                 const combinedData = {
+  //                   cerita: ceritaItem,
+  //                   additionalData: data.data // Assuming your response structure
+  //                 };
+  //                 this.cerita.push(combinedData);
+  //               } else {
+  //                 console.log('No data found');
+  //               }
+  //             },
+  //           );
+  //         });
+  //       },
+  //     );
+  //   }
+  // }
 }

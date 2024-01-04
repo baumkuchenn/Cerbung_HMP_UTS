@@ -9,7 +9,15 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./read.page.scss'],
 })
 export class ReadPage implements OnInit {
-  cerbungTitle: string = "";
+
+  id: string = "";
+  title: string = "";
+  tgl_rilis: string = "";
+  url_foto: string = "";
+  access: string = ""
+
+  cerita: any[] = [];
+
   cerbungs: any | null = null; // Menambahkan variabel cerbung dan menginisialisasinya sebagai null
   storys: any | null = null;
   isRequestingContribute: boolean = false;
@@ -25,13 +33,21 @@ export class ReadPage implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.cerbungTitle = params.get('title')!;
-      const receivedData = params.get('data');
+      this.id = params.get('id')!;
+      this.title = params.get('title')!;
+      this.tgl_rilis = params.get('tgl_rilis')!;
+      this.url_foto = params.get('url_foto')!;
+      this.access = params.get('access')!;
     });
-    this.cerbungs = this.cerbungservice.cerbungs.filter(cerbung => cerbung.title == this.cerbungTitle) || null;
-    this.storys = this.cerbungservice.storys.filter(story => story.cerbungTitle == this.cerbungTitle) || null;
-    const totalLikes = this.cerbungservice.calculateTotalLikes(this.cerbungTitle);
-    this.cerbungservice.setLikeCount(this.cerbungTitle, totalLikes);
+    this.cerbungservice.getData(this.id).subscribe(
+      (data: any) => {
+        if (data && data.result === 'OK') {
+          this.cerita = data.data
+        } else {
+          console.log('No data found');
+        }
+      },
+    );
   }
 
   tambahLike(pParagraf: string) {
