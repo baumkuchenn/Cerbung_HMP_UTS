@@ -59,8 +59,8 @@
           </div>
         </ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content *ngFor="let story of storys" style="text-align: justify">
-        {{story.paragraf}}
+      <ion-card-content *ngFor="let item of paragraf" style="text-align: justify">
+        {{item.paragraf.isi_paragraf}}
         <div style="
             display: flex;
             justify-content: space-between;
@@ -68,21 +68,18 @@
           ">
           <div style="display: flex; align-items: center">
             <ion-icon name="person-outline" style="margin-right: 8px"></ion-icon>
-            {{ story.author }}
+            {{ item.paragraf.username }}
           </div>
-          <ion-button (click)="tambahLike(story.paragraf)" style="color: white; --background: transparent">
-            <ion-icon *ngIf="story.like === 1" name="thumbs-up"></ion-icon>
-            <ion-icon *ngIf="story.like === 0" name="thumbs-up-outline"></ion-icon>
+          <ion-button (click)="tambahLike(item.paragraf.id, item.additionalData)"
+            style="color: white; --background: transparent">
+            <ion-icon *ngIf="item.additionalData === 'Liked'" name="thumbs-up" style="margin-right: 8px"></ion-icon>
+            <ion-icon *ngIf="item.additionalData === 'Not Liked'" name="thumbs-up-outline"
+              style="margin-right: 8px"></ion-icon>
+            {{ item.paragraf.total_likes }}
           </ion-button>
         </div>
       </ion-card-content>
-      <ion-button shape="round" style="float: right; margin-right: 2vh; margin-bottom: 3vh"
-        (click)="toggleRequestContribute()" [hidden]="isRequestingContribute"
-        [style.display]="buttonVisible ? 'block' : 'none'">
-        + Request to Contribute
-      </ion-button>
-      <!-- Bagian "Submit" yang sekarang ditempatkan di dalam bagian "+ Request" -->
-      <ion-card-content *ngIf="isRequestingContribute" style="text-align: justify">
+      <ion-card-content *ngIf="item.cerita[0].access === 'Public'">
         <!-- Input untuk paragraf baru -->
         <ion-textarea label="Continue the Story" labelPlacement="floating" fill="outline" rows="5"
           [(ngModel)]="newParagraph" #paragraphInput maxlength="70"></ion-textarea>
@@ -93,19 +90,32 @@
         </div>
 
         <!-- Tombol "Submit" untuk mengirim paragraf baru -->
-        <ion-button (click)="submitContribution()" style="
-            color: white;
-            float: right;
-            margin-top: 2vh;
-            margin-bottom: 3vh;
-          " shape="round">
+        <ion-button (click)="submitContribution()" style="color: white;float: right;margin-top: 2vh;margin-bottom: 3vh;"
+          shape="round">
           Submit
+        </ion-button>
+
+        <ion-button (click)="followCerita()" *ngIf="followed === 'Followed'" shape="round"
+          style="float: left; margin-bottom: 3vh">
+          Unfollow
+        </ion-button>
+        <ion-button (click)="followCerita()" *ngIf="followed === 'Not Followed'" shape="round"
+          style="float: left; margin-bottom: 3vh">
+          Follow
         </ion-button>
       </ion-card-content>
 
-      <ion-button shape="round" style="float: left; margin-left: 2vh; margin-bottom: 3vh">
-        + Follow
-      </ion-button>
+      <ion-card-content *ngIf="item.cerita[0].access === 'Restricted'">
+        <ion-button shape="round" style="float: right; margin-right: 2vh; margin-bottom: 3vh"
+          (click)="toggleRequestContribute()" [hidden]="isRequestingContribute"
+          [style.display]="buttonVisible ? 'block' : 'none'">
+          + Request to Contribute
+        </ion-button>
+        <!-- Bagian "Submit" yang sekarang ditempatkan di dalam bagian "+ Request" -->
+        <ion-card-content *ngIf="isRequestingContribute" style="text-align: justify">
+        </ion-card-content>
+      </ion-card-content>
+
     </ion-card>
   </div>
 </ion-content>

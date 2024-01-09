@@ -10,8 +10,11 @@ import { AlertController } from '@ionic/angular';
 })
 export class ReadPage implements OnInit {
 
+  idUser: string = localStorage.getItem('app_id') || '';
   id: string = "";
   cerita: any[] = [];
+  paragraf: any[] = [];
+  followed: string = "";
 
   cerbungs: any | null = null; // Menambahkan variabel cerbung dan menginisialisasinya sebagai null
   storys: any | null = null;
@@ -39,7 +42,6 @@ export class ReadPage implements OnInit {
                 cerita: result,
                 additionalData: data.data // Assuming your response structure
               };
-              console.log(combinedData);
               this.cerita.push(combinedData);
             } else {
               console.log('No data found');
@@ -47,13 +49,48 @@ export class ReadPage implements OnInit {
           },
         );
       });
+    this.cerbungservice.getParagraf(this.id).subscribe(
+      (paragraf: any[]) => {
+        paragraf.forEach((paragrafItem) => {
+          this.cerbungservice.cekLikeParagraf(paragrafItem.id, this.idUser).subscribe(
+            (data: any) => {
+              if (data && data.result === 'OK') {
+                const combinedData = {
+                  paragraf: paragrafItem,
+                  additionalData: data.data // Assuming your response structure
+                };
+                this.paragraf.push(combinedData);
+              } else {
+                console.log('No data found');
+              }
+            },
+          );
+        });
+      }
+    );
+    this.cerbungservice.cekFollowCerita(this.id, this.idUser).subscribe(
+      (data: any) => {
+        this.followed = data.data;
+      }
+    );
   }
 
-  tambahLike(pParagraf: string) {
-    const story = this.cerbungservice.storys.find(story => story.paragraf === pParagraf);
-    if (story) {
-      story.like = 1 - story.like;
-    }
+  tambahLike(pIdParagraf: string, pStatus: string){
+    this.cerbungservice.tambahLikeParagraf(pIdParagraf, this.idUser, pStatus).subscribe(
+      (response: any)=>{
+        alert(response.message);
+        window.location.reload();
+      }
+    );
+  }
+
+  followCerita(){
+    this.cerbungservice.tambahFollowCerita(this.id, this.idUser, this.followed).subscribe(
+      (response: any) => {
+        alert(response.message)
+        window.location.reload();
+      }
+    )
   }
 
   tambahParagraf(title: string) {

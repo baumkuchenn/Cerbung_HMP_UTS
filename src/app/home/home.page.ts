@@ -31,6 +31,7 @@ export class HomePage {
                   additionalData: data.data // Assuming your response structure
                 };
                 this.cerita.push(combinedData);
+                console.log(cerita);
               } else {
                 console.log('No data found');
               }

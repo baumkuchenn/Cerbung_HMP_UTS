@@ -174,36 +174,33 @@ export class CerbungserviceService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  //USER
 
-  login(p_username:string,p_password:string)
-  {
+  //USER
+  login(p_username: string, p_password: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
-    body.set('username', p_username); 
-    body.set('password', p_password); 
+    body.set('username', p_username);
+    body.set('password', p_password);
     const urlEncodedData = body.toString();
     return this.http.post("https://ubaya.me/hybrid/160721029/cerbung/login.php", urlEncodedData, { headers });
   }
 
-  regis(p_username:string,p_password:string,p_foto:string)
-  {
+  regis(p_username: string, p_password: string, p_foto: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
-    body.set('username', p_username); 
-    body.set('password', p_password); 
-    body.set('foto', p_foto); 
+    body.set('username', p_username);
+    body.set('password', p_password);
+    body.set('foto', p_foto);
     const urlEncodedData = body.toString();
     return this.http.post("https://ubaya.me/hybrid/160721029/cerbung/regis.php", urlEncodedData, { headers });
   }
 
-  changePass(p_id:string,p_newpassword:string,p_oldpassword:string)
-  {
+  changePass(p_id: string, p_newpassword: string, p_oldpassword: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
-    body.set('idUsers', p_id); 
-    body.set('old_password', p_oldpassword); 
-    body.set('new_password', p_newpassword); 
+    body.set('idUsers', p_id);
+    body.set('old_password', p_oldpassword);
+    body.set('new_password', p_newpassword);
     const urlEncodedData = body.toString();
     return this.http.post("https://ubaya.me/hybrid/160721029/cerbung/change_pass.php", urlEncodedData, { headers });
   }
@@ -235,7 +232,7 @@ export class CerbungserviceService {
     return this.http.get("https://ubaya.me/hybrid/160721029/get_cerita.php?key=" + key);
   }
 
-  getDetailCerita(pIdCerita: string){
+  getDetailCerita(pIdCerita: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
     body.set('idCerita', pIdCerita);
@@ -244,7 +241,7 @@ export class CerbungserviceService {
       "https://ubaya.me/hybrid/160721029/cerbung/get_detail_cerita.php", urlEncodedData, { headers });
   }
 
-  getData(pIdCerita: string){
+  getData(pIdCerita: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     const body = new URLSearchParams();
     body.set('idCerita', pIdCerita);
@@ -253,6 +250,61 @@ export class CerbungserviceService {
       "https://ubaya.me/hybrid/160721029/cerbung/get_data.php", urlEncodedData, { headers });
   }
 
+  cekFollowCerita(pIdCerita: string, pIdUser: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idCerita', pIdCerita);
+    body.set('idUser', pIdUser);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/cek_follow_cerita.php", urlEncodedData, { headers });
+  }
+
+  tambahFollowCerita(pIdCerita: string, pIdUser: string, pStatus: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idCerita', pIdCerita);
+    body.set('idUser', pIdUser);
+    body.set('status', pStatus);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/add_follow_cerita.php", urlEncodedData, { headers });
+  }
+
+
+  // PARAGRAF
+  getParagraf(pIdCerita: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idCerita', pIdCerita);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/get_paragraf.php", urlEncodedData, { headers });
+  }
+
+  cekLikeParagraf(pIdParagraf: string, pIdUser: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idParagraf', pIdParagraf);
+    body.set('idUser', pIdUser);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/cek_like_paragraf.php", urlEncodedData, { headers });
+  }
+
+  tambahLikeParagraf(pIdParagraf: string, pIdUser: string, pStatus: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idParagraf', pIdParagraf);
+    body.set('idUser', pIdUser);
+    body.set('status', pStatus);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/add_like_paragraf.php", urlEncodedData, { headers });
+  }
+
+
+  // LAMA
   createCerbung(newCerbung: any): void {
     newCerbung.id = this.cerbungs.length + 1;
     newCerbung.tglRilis = new Date();
@@ -370,7 +422,7 @@ export class CerbungserviceService {
     this.storys.forEach(story => {
       // Update totalLikesMap
       const currentTotalLikes = totalLikesMap.get(story.author) || 0;
-      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0)); 
+      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0));
     });
 
     // Simpan informasi gabungan pakai map
@@ -412,7 +464,7 @@ export class CerbungserviceService {
     this.storys.forEach(story => {
       // Update totalLikesMap
       const currentTotalLikes = totalLikesMap.get(story.author) || 0;
-      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0)); 
+      totalLikesMap.set(story.author, currentTotalLikes + (story.like || 0));
     });
 
     // Simpan informasi gabungan pakai map
