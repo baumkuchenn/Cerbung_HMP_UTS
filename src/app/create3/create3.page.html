@@ -19,42 +19,57 @@
 
   <div style="width: 90%; margin: auto; margin-top: 2vh;margin-bottom: 5vh;">
     <div>
-      <img [src]="cerbungs.url" style="height: 39vh; width: 100%; display: block; object-fit: cover" />
+      <img [src]="cerbungs.url" alt="Image Cover"
+        style="height: 39vh; width: 100%; display: block; object-fit: cover" />
       <h2>{{ cerbungs.title }}</h2>
-      <ion-card
-        style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
-        {{cerbungs.genre}}
-      </ion-card>
+      <div style="display: flex; justify-content: flex-start; gap: 10px;">
+        <ion-card
+          style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
+          {{ cerbungs.genre }}
+        </ion-card>
+        <ion-card
+          style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
+          {{ access }}
+        </ion-card>
+        <ion-card
+          style="background-color: #686565;color: #fff;font-size: 16px;padding: 8px;border-radius: 4px; width: fit-content; margin: 1vh 0;">
+          {{ cerbungs.tglRilis }}
+        </ion-card>
+      </div>
+
       <p>{{ cerbungs.shortDesc }}</p>
       <div style="border: 1px solid;"></div>
-      <p>{{ storys.paragraf }}</p>
+      <p>{{paragraph}}</p>
+
     </div>
-    <ion-checkbox labelPlacement="end">I agree with the rules and policies in creating Cerbung. This includes not
+    <ion-checkbox [(ngModel)]="isCheckboxChecked" labelPlacement="end">I agree with the rules and policies in creating Cerbung. This includes not
       containing racial slurs, discrimination, religion, advertisements, and politics</ion-checkbox>
   </div>
-    
-    
-    <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
-      <ion-col size="4">
-        <ion-router-link routerLink="/create2">
-          <ion-button fill="outline" shape="round">
-            Previous
-          </ion-button>
-        </ion-router-link>
-      </ion-col>
-      <ion-col size="4" class="ion-text-center">
-        <ion-text>
-          <p>3 of 3</p>
-        </ion-text>
-      </ion-col>
-      <ion-col size="4" class="ion-text-end">
-        <ion-router-link routerLink="/home">
-          <ion-button fill="outline" shape="round">
-            Publish This Cerbung
-          </ion-button>
-        </ion-router-link>
-      </ion-col>
-    </ion-row>
-    
-    
+
+
+  <ion-row style="margin-top: 10vh;margin-bottom: 10vh;">
+    <ion-col size="4">
+      <ion-router-link routerLink="/create2">
+        <ion-button fill="outline" shape="round">
+          Previous
+        </ion-button>
+      </ion-router-link>
+    </ion-col>
+    <ion-col size="4" class="ion-text-center">
+      <ion-text>
+        <p>3 of 3</p>
+      </ion-text>
+    </ion-col>
+    <ion-col size="4" class="ion-text-end">
+      
+        <ion-button [disabled]="!isCheckboxChecked" fill="outline" shape="round" (click)="handleButtonClick()">
+          Publish This Cerbung
+          <!-- <ion-router-link routerLink="/home"> -->
+          <!-- </ion-router-link> -->
+        </ion-button>
+      
+    </ion-col>
+  </ion-row>
+
+
 </ion-content>

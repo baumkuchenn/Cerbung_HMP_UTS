@@ -323,6 +323,36 @@ export class CerbungserviceService {
       "https://ubaya.me/hybrid/160721029/cerbung/add_paragraf.php", urlEncodedData, { headers });
   }
 
+  //CREATE
+  getGenre(): Observable<any> {
+    return this.http.get(
+      "https://ubaya.me/hybrid/160721029/cerbung/get_genre.php");
+  }
+
+  cerita: any[] = []
+  access: string = ''
+  paragraph: string = ''
+
+  arrCerita(newCerita: any): void {
+    this.cerita.push(newCerita);
+  }
+  newCerita(pTitle: string, pUrl: string, pShortDesc: string, pAccess: string, pUserId: string, pGenreId: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('title', pTitle);
+    body.set('url', pUrl);
+    body.set('desc', pShortDesc);
+    body.set('access', pAccess);
+    body.set('idUser', pUserId);
+    body.set('idGenre', pGenreId);
+
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/add_cerbung.php", urlEncodedData, { headers });
+
+  }
+
+
 
   // LAMA
   createCerbung(newCerbung: any): void {

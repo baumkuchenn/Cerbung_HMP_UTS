@@ -19,13 +19,13 @@
 
   <div style="width: 90%; margin: auto; margin-top: 2vh; margin-bottom: 5vh">
     <ion-list>
-      <ion-radio-group value="restricted">
+      <ion-radio-group value="restricted" [(ngModel)]="access">
         <ion-list-header>
           <ion-label>Acces to this Cerbung</ion-label>
         </ion-list-header>
 
         <ion-item>
-          <ion-radio slot="start" value="restricted"></ion-radio>
+          <ion-radio slot="start" value="Restricted"></ion-radio>
           <ion-label
             >Restricted <br />
             <ion-text>(all approved users can contributes)</ion-text>
@@ -33,7 +33,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-radio slot="start" value="public"></ion-radio>
+          <ion-radio slot="start" value="Public"></ion-radio>
           <ion-label
             >Public <br />
             <ion-text>(all users can contributes)</ion-text>

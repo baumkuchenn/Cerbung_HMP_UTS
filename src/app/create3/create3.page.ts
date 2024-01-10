@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CerbungserviceService } from '../cerbungservice.service';
 
 @Component({
@@ -10,14 +10,66 @@ import { CerbungserviceService } from '../cerbungservice.service';
 export class Create3Page implements OnInit {
 
   cerbungs: any = [];
-  storys: any = [];
+  paragraph: string = ''
+  access: string = ''
+  isCheckboxChecked: boolean = false;
 
-  constructor(private cerbungservice:CerbungserviceService) {  }
+  constructor(private router: Router, private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
-    this.cerbungs = this.cerbungservice.cerbungs.pop();
-    this.storys = this.cerbungservice.storys.pop();
+    // this.cerbungs = this.cerbungservice.cerbungs.pop();
+    // this.storys = this.cerbungservice.storys.pop();
+
+    this.cerbungs = this.cerbungservice.cerita.pop()
+    this.access = this.cerbungservice.access
+    this.paragraph = this.cerbungservice.paragraph
+
   }
 
+
+  submitCerita() {
+    this.cerbungservice.newCerita(
+      this.cerbungs.title,
+      this.cerbungs.url,
+      this.cerbungs.shortDesc,
+      this.access,
+      this.cerbungs.idUser,
+      this.cerbungs.idGenre
+    ).subscribe(
+      (response: any) => {
+        alert(response.message);
+        //Kirim notif
+      }
+    )
+
+  }
+
+  submitParagraph() {
+
+    this.cerbungservice.tambahParagrafBaru(
+      this.paragraph,
+      this.cerbungs.idUser,
+      this.cerbungs.idCeritaNew
+    ).subscribe(
+      (response: any) => {
+        alert(response.message);
+        //Kirim notif
+      }
+    )
+  }
+
+  handleButtonClick() {
+    if (this.isCheckboxChecked) {
+      this.submitCerita();
+      this.submitParagraph();
+
+      this.router.navigate(['/home'])
+      
+      // Delayed refresh after 1 second (adjust the time as needed)
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
+  }
 
 }

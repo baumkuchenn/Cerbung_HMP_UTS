@@ -20,10 +20,12 @@ export class Create2Page implements OnInit {
   }
 
   createStory(){
-    const latestCerbung = this.cerbungservice.cerbungs.pop();
-    if (latestCerbung){
-      this.cerbungservice.createStory(latestCerbung.title, this.newParagraph);
-    }
+    // const latestCerbung = this.cerbungservice.cerbungs.pop();
+    // if (latestCerbung){
+    //   this.cerbungservice.createStory(latestCerbung.title, this.newParagraph);
+    // }
+    this.cerbungservice.access = this.access;
+    this.cerbungservice.paragraph = this.newParagraph;
     this.router.navigate(['/create3']);
   }
 
