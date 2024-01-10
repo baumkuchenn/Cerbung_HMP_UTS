@@ -21,75 +21,63 @@
     <ion-segment-button value="liked">
       <ion-label>Most Liked</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="following">
-      <ion-label>Following</ion-label>
+    <ion-segment-button value="All">
+      <ion-label>All User</ion-label>
     </ion-segment-button>
   </ion-segment>
 
   <div *ngIf="tampilan=='liked'">
     <ion-grid>
-      <ion-row
-        *ngFor="let user of penggunaAll"
-        style="
+      <ion-row *ngFor="let item of usersMostLiked" style="
           border: 2px solid #ffffff;
           border-radius: 12px;
           margin: 16px;
           padding: 16px;
-        "
-      >
+        ">
         <ion-col style="display: flex; align-items: center">
-          <img
-            [src]="user.foto"
-            style="
+          <img [src]="item.url_foto" style="
               height: 12vh;
               width: 12vh;
               object-fit: cover;
               border-radius: 50%;
-            "
-          />
+            " />
           <div style="margin-left: 16px">
-            <h3 style="margin-top: 0">{{ user.username }}</h3>
-            since {{ user.tglDibuat | date:'yyyy' }}
+            <h3 style="margin-top: 0">{{ item.username }}</h3>
+            since {{ item.tgl_akun_dibuat | date:'yyyy' }}
           </div>
         </ion-col>
         <ion-col class="ion-text-end">
           <!-- Align content to the end (right) -->
-          <h1>{{ user.totalLike }}</h1>
+          <h3>{{ item.like_count }} like(s)</h3>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
-  <div *ngIf="tampilan=='following'">
+  <div *ngIf="tampilan=='All'">
     <ion-grid>
-      <ion-row
-        *ngFor="let user of pengguna"
-        style="
+      <ion-row *ngFor="let item of users" style="
           border: 2px solid #ffffff;
           border-radius: 12px;
-          margin: 16px;
+          margin: 16px; 
           padding: 16px;
-        "
-      >
+        ">
         <ion-col style="display: flex; align-items: center">
-          <img
-            [src]="user.foto"
-            style="
+          <img [src]="item.url_foto" style="
               height: 12vh;
               width: 12vh;
               object-fit: cover;
               border-radius: 50%;
-            "
-          />
+            " />
           <div style="margin-left: 16px">
-            <h3 style="margin-top: 0">{{ user.username }}</h3>
-            since {{ user.tglDibuat | date:'yyyy' }} <br />
-            Latest Post: {{ user.newestTglUpdate | date:'dd/MM/yyyy'}}
+            <h3 style="margin-top: 0">{{ item.username }}</h3>
+            since {{ item.tgl_akun_dibuat | date:'yyyy' }} <br />
           </div>
         </ion-col>
         <ion-col class="ion-text-end">
           <!-- Align content to the end (right) -->
-          <h1>{{ user.totalLike }}</h1>
+          <!-- <h1>{{ item.totalLike }}</h1> -->
+          <h5>Latest Post: {{ item.latest_post}}</h5>
         </ion-col>
       </ion-row>
     </ion-grid>

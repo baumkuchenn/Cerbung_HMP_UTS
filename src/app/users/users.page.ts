@@ -8,17 +8,27 @@ import { CerbungserviceService } from '../cerbungservice.service';
 })
 export class UsersPage implements OnInit {
 
-  pengguna: any[] = [];
-  penggunaAll: any[] = [];
-  loggedInUser: string | null = null;
+  users: any[] = [];
+  usersMostLiked: any[] = [];
+  idUser:string = '';
+  tampilan = "liked";
 
   constructor(private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
-    this.loggedInUser = this.cerbungservice.getLoggedInUser();
-    this.pengguna = this.cerbungservice.getUserDanStory();
-    this.penggunaAll = this.cerbungservice.getUserDanStorySemua();
+    // this.loggedInUser = this.cerbungservice.getLoggedInUser();
+    // this.pengguna = this.cerbungservice.getUserDanStory();
+    // this.penggunaAll = this.cerbungservice.getUserDanStorySemua();
+    this.idUser = localStorage.getItem('app_id') || '';
+    this.cerbungservice.getAllUser().subscribe(
+      (data) => {
+        this.users = data;
+      }
+    )
+    this.cerbungservice.getMostLikedUser().subscribe(
+      (data) => {
+        this.usersMostLiked = data;
+      }
+    )
   }
-
-  tampilan = "liked";
 }

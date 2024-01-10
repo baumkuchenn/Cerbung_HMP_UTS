@@ -221,7 +221,13 @@ export class CerbungserviceService {
     }
     return null;
   }
+  getAllUser():Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/display_users.php");
+  }
 
+  getMostLikedUser():Observable<any> {
+    return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/display_usersMostLiked.php");
+  }
 
   // CERITA
   getCerita(): Observable<any> {
@@ -351,8 +357,6 @@ export class CerbungserviceService {
       "https://ubaya.me/hybrid/160721029/cerbung/add_cerbung.php", urlEncodedData, { headers });
 
   }
-
-
 
   // LAMA
   createCerbung(newCerbung: any): void {
