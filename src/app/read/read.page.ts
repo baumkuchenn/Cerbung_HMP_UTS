@@ -11,17 +11,12 @@ import { AlertController } from '@ionic/angular';
 export class ReadPage implements OnInit {
 
   idUser: string = localStorage.getItem('app_id') || '';
-  id: string = "";
+  idCerita: string = "";
   cerita: any[] = [];
   paragraf: any[] = [];
   followed: string = "";
 
-  cerbungs: any | null = null; // Menambahkan variabel cerbung dan menginisialisasinya sebagai null
-  storys: any | null = null;
-  isRequestingContribute: boolean = false;
   newParagraph: string = '';
-  buttonVisible = true;
-  cerbungLikes: { [title: string]: boolean } = {};
 
   constructor(
     public cerbungservice: CerbungserviceService,
@@ -31,11 +26,11 @@ export class ReadPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.idCerita = params['id'];
     });
-    this.cerbungservice.getDetailCerita(this.id).subscribe(
+    this.cerbungservice.getDetailCerita(this.idCerita).subscribe(
       (result) => {
-        this.cerbungservice.getData(this.id).subscribe(
+        this.cerbungservice.getData(this.idCerita).subscribe(
           (data: any) => {
             if (data && data.result === 'OK') {
               const combinedData = {
@@ -49,7 +44,7 @@ export class ReadPage implements OnInit {
           },
         );
       });
-    this.cerbungservice.getParagraf(this.id).subscribe(
+    this.cerbungservice.getParagraf(this.idCerita).subscribe(
       (paragraf: any[]) => {
         paragraf.forEach((paragrafItem) => {
           this.cerbungservice.cekLikeParagraf(paragrafItem.id, this.idUser).subscribe(
@@ -68,52 +63,47 @@ export class ReadPage implements OnInit {
         });
       }
     );
-    this.cerbungservice.cekFollowCerita(this.id, this.idUser).subscribe(
+    this.cerbungservice.cekFollowCerita(this.idCerita, this.idUser).subscribe(
       (data: any) => {
         this.followed = data.data;
       }
     );
   }
 
-  tambahLike(pIdParagraf: string, pStatus: string){
+  tambahLike(pIdParagraf: string, pStatus: string) {
     this.cerbungservice.tambahLikeParagraf(pIdParagraf, this.idUser, pStatus).subscribe(
-      (response: any)=>{
+      (response: any) => {
         alert(response.message);
+        //Kirim notif
+
         window.location.reload();
       }
     );
   }
 
-  followCerita(){
-    this.cerbungservice.tambahFollowCerita(this.id, this.idUser, this.followed).subscribe(
+  followCerita() {
+    this.cerbungservice.tambahFollowCerita(this.idCerita, this.idUser, this.followed).subscribe(
       (response: any) => {
         alert(response.message)
+        //Kirim notif
+
+
         window.location.reload();
       }
     )
   }
 
-  tambahParagraf(title: string) {
-    const story = this.cerbungservice.storys.find(story => story.cerbungTitle == title);
-    if (story) {
-      story.paragraf += 1;
-    }
-  }
-
-  toggleRequestContribute() {
-    this.isRequestingContribute = !this.isRequestingContribute;
-    this.buttonVisible = false;
-  }
-
-  async submitContribution() {
+  async tambahParagraf() {
     if (this.newParagraph.length > 0) {
-      // Anda dapat menambahkan logika untuk menyimpan paragraf baru ke dalam cerbung di sini
-      // Misalnya, dengan menambahkannya ke array storys atau mengirimkannya ke server.
-      // Setelah itu, atur kembali isRequestingContribute menjadi false.
-      // ...
-      this.isRequestingContribute = false;
-      this.buttonVisible = true;
-      this.newParagraph = ''; // Mengosongkan input setelah mengirimkan kontribusi
+      this.cerbungservice.tambahParagrafBaru(this.newParagraph, this.idUser, this.idCerita).subscribe(
+        (response: any) => {
+          alert(response.message);
+          //Kirim notif
+
+
+          window.location.reload();
+        }
+      )
     }
     else {
       await this.presentAlert();
@@ -128,5 +118,9 @@ export class ReadPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  requestContribute(){
+
   }
 }

@@ -18,8 +18,7 @@
   </ion-header>
 
   <div style="margin: 2vh">
-    <ion-card *ngFor="let item of cerita" style="border-radius: 12px; margin-top: 2vh"
-      [hidden]="isRequestingContribute">
+    <ion-card *ngFor="let item of cerita" style="border-radius: 12px; margin-top: 2vh">
       <img [src]="item.cerita[0].url_foto" style="height: 39vh; width: 100%; display: block; object-fit: cover" />
       <ion-card-header style="text-align: left">
         <ion-card-title>{{item.cerita[0].title}}</ion-card-title>
@@ -90,7 +89,7 @@
         </div>
 
         <!-- Tombol "Submit" untuk mengirim paragraf baru -->
-        <ion-button (click)="submitContribution()" style="color: white;float: right;margin-top: 2vh;margin-bottom: 3vh;"
+        <ion-button (click)="tambahParagraf()" style="color: white;float: right;margin-top: 2vh;margin-bottom: 3vh;"
           shape="round">
           Submit
         </ion-button>
@@ -106,14 +105,18 @@
       </ion-card-content>
 
       <ion-card-content *ngIf="item.cerita[0].access === 'Restricted'">
-        <ion-button shape="round" style="float: right; margin-right: 2vh; margin-bottom: 3vh"
-          (click)="toggleRequestContribute()" [hidden]="isRequestingContribute"
-          [style.display]="buttonVisible ? 'block' : 'none'">
+        <ion-button (click)="requestContribute()" shape="round" style="float: right; margin-right: 2vh; margin-bottom: 3vh">
           + Request to Contribute
         </ion-button>
-        <!-- Bagian "Submit" yang sekarang ditempatkan di dalam bagian "+ Request" -->
-        <ion-card-content *ngIf="isRequestingContribute" style="text-align: justify">
-        </ion-card-content>
+
+        <ion-button (click)="followCerita()" *ngIf="followed === 'Followed'" shape="round"
+          style="float: left; margin-bottom: 3vh">
+          Unfollow
+        </ion-button>
+        <ion-button (click)="followCerita()" *ngIf="followed === 'Not Followed'" shape="round"
+          style="float: left; margin-bottom: 3vh">
+          Follow
+        </ion-button>
       </ion-card-content>
 
     </ion-card>

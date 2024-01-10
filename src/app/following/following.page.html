@@ -18,8 +18,8 @@
   </ion-header>
   <ion-grid>
     <ion-row
-      *ngFor="let cerbung of cerbungs"
-      [routerLink]="['/read', cerbung.title]"
+      *ngFor="let item of cerita"
+      [routerLink]="['/read', item.cerita.id]"
       style="
         border: 2px solid #ffffff;
         border-radius: 12px;
@@ -29,13 +29,13 @@
     >
       <ion-col style="display: flex">
         <img
-          [src]="cerbung.url"
+          [src]="item.cerita.url_foto"
           style="height: 32vh; width: 32vh; object-fit: cover"
         />
         <div style="margin-left: 16px">
-          <h3 style="margin-top: 0">{{ cerbung.title }}</h3>
-          by {{ cerbung.author }} <br />
-          Last update: {{ cerbung.newestTglUpdate | date:'dd/MM/yyyy'}}
+          <h3 style="margin-top: 0">{{ item.cerita.title }}</h3>
+          by {{ item.additionalData[0].username }} <br />
+          Last update: {{ item.additionalData[0].last_update | date:'dd/MM/yyyy'}}
         </div>
       </ion-col>
     </ion-row>

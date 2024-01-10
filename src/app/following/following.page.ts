@@ -8,14 +8,31 @@ import { CerbungserviceService } from '../cerbungservice.service';
 })
 export class FollowingPage implements OnInit {
 
-  cerbungs: any[] = [];
-  loggedInUser: string | null = null;
+  idUser: string = localStorage.getItem('app_id') || '';
+  cerita: any[] = [];
 
   constructor(private cerbungservice: CerbungserviceService) { }
 
   ngOnInit() {
-    this.loggedInUser = this.cerbungservice.getLoggedInUser();
-    this.cerbungs = this.cerbungservice.getCerbungDanStory();
+    this.cerbungservice.getFollowedCerita(this.idUser).subscribe(
+      (cerita: any[]) => {
+        cerita.forEach((ceritaItem) => {
+          this.cerbungservice.getData(ceritaItem.id).subscribe(
+            (data: any) => {
+              if (data && data.result === 'OK') {
+                const combinedData = {
+                  cerita: ceritaItem,
+                  additionalData: data.data // Assuming your response structure
+                };
+                this.cerita.push(combinedData);
+              } else {
+                console.log('No data found');
+              }
+            },
+          );
+        });
+      }
+    );
   }
 
 }
