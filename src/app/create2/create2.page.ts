@@ -17,6 +17,7 @@ export class Create2Page implements OnInit {
   ){}
 
   ngOnInit() {
+    
   }
 
   createStory(){
@@ -28,5 +29,7 @@ export class Create2Page implements OnInit {
     this.cerbungservice.paragraph = this.newParagraph;
     this.router.navigate(['/create3']);
   }
+
+  
 
 }

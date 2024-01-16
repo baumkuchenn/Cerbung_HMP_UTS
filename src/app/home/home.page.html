@@ -18,7 +18,7 @@
   </ion-header>
 
   <div style="margin: 2vh">
-    <ion-input label="Search Cerbung" labelPlacement="floating" [(ngModel)]="search" fill="outline"></ion-input>
+    <ion-input label="Search Cerbung" labelPlacement="floating" [(ngModel)]="search" (keyup)="onSearchChange()" fill="outline"></ion-input>
     <ion-card *ngFor="let item of cerita" style="border: 1px solid #ffffff; border-radius: 12px; margin-top: 2vh">
       <img [src]="item.cerita.url_foto" style="height: 32vh; width: 100%; display: block; object-fit: cover" />
       <ion-card-header style="text-align: left">

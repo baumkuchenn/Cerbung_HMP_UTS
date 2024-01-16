@@ -17,7 +17,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-segment [(ngModel)]="tampilan">
+  <ion-segment [(ngModel)]="tampilan" style="position: fixed; z-index: 1; width: 100%; background-color: rgb(26, 25, 25)">
     <ion-segment-button value="liked">
       <ion-label>Most Liked</ion-label>
     </ion-segment-button>
@@ -26,7 +26,7 @@
     </ion-segment-button>
   </ion-segment>
 
-  <div *ngIf="tampilan=='liked'">
+  <div *ngIf="tampilan=='liked'" style="margin-top: 56px;">
     <ion-grid>
       <ion-row *ngFor="let item of usersMostLiked" style="
           border: 2px solid #ffffff;
@@ -54,7 +54,7 @@
     </ion-grid>
   </div>
 
-  <div *ngIf="tampilan=='All'">
+  <div *ngIf="tampilan=='All'" style="margin-top: 56px;">
     <ion-grid>
       <ion-row *ngFor="let item of users" style="
           border: 2px solid #ffffff;
@@ -74,10 +74,11 @@
             since {{ item.tgl_akun_dibuat | date:'yyyy' }} <br />
           </div>
         </ion-col>
-        <ion-col class="ion-text-end">
+        <ion-col class="ion-text-end" style="display: flex; align-items: center;">
           <!-- Align content to the end (right) -->
-          <!-- <h1>{{ item.totalLike }}</h1> -->
-          <h5>Latest Post: {{ item.latest_post}}</h5>
+          <div style="flex-grow: 1;">
+            <h5 style="text-align: right;">Latest Post: {{ item.latest_post}}</h5>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

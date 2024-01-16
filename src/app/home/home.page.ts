@@ -20,25 +20,57 @@ export class HomePage {
   ) { }
 
   ngOnInit() {
-    this.cerbungservice.getCerita().subscribe(
+    // this.cerbungservice.getCerita().subscribe(
+    //   (cerita: any[]) => {
+    //     cerita.forEach((ceritaItem) => {
+    //       this.cerbungservice.getData(ceritaItem.id).subscribe(
+    //         (data: any) => {
+    //           if (data && data.result === 'OK') {
+    //             const combinedData = {
+    //               cerita: ceritaItem,
+    //               additionalData: data.data // Assuming your response structure
+    //             };
+    //             this.cerita.push(combinedData);
+    //           } else {
+    //             console.log('No data found');
+    //           }
+    //         },
+    //       );
+    //     });
+    //   }
+    // );
+
+    this.fetchCerita();
+  }
+
+  fetchCerita() {
+    this.cerbungservice.getCerita(this.search).subscribe(
       (cerita: any[]) => {
-        cerita.forEach((ceritaItem) => {
-          this.cerbungservice.getData(ceritaItem.id).subscribe(
+        this.cerita = cerita.map((ceritaItem) => {
+          return {
+            cerita: ceritaItem,
+            additionalData: null, // Set to null initially, will be fetched later
+          };
+        });
+  
+        // Fetch additional data for each cerita
+        this.cerita.forEach((combinedData) => {
+          this.cerbungservice.getData(combinedData.cerita.id).subscribe(
             (data: any) => {
               if (data && data.result === 'OK') {
-                const combinedData = {
-                  cerita: ceritaItem,
-                  additionalData: data.data // Assuming your response structure
-                };
-                this.cerita.push(combinedData);
+                combinedData.additionalData = data.data;
               } else {
                 console.log('No data found');
               }
             },
           );
         });
-      }
+      },
     );
+  }
+
+  onSearchChange() {
+    this.fetchCerita();
   }
 
   // searchCerita() {

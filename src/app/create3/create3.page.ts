@@ -24,8 +24,16 @@ export class Create3Page implements OnInit {
     this.access = this.cerbungservice.access
     this.paragraph = this.cerbungservice.paragraph
 
-  }
 
+  }
+  //Untuk mengosongkan isi variable dan mengganti data yang baru saat button previous di klik
+  // clearArrayStory() {
+  //   this.paragraph = ''
+  //   this.access = ''
+
+  //   this.cerbungservice.access = ''
+  //   this.cerbungservice.paragraph = ''
+  // }
 
   submitCerita() {
     this.cerbungservice.newCerita(
@@ -64,7 +72,7 @@ export class Create3Page implements OnInit {
       this.submitParagraph();
 
       this.router.navigate(['/home'])
-      
+
       // Delayed refresh after 1 second (adjust the time as needed)
       setTimeout(() => {
         window.location.reload();

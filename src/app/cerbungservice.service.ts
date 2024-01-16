@@ -230,8 +230,12 @@ export class CerbungserviceService {
   }
 
   // CERITA
-  getCerita(): Observable<any> {
-    return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/get_cerita.php");
+  // getCerita(): Observable<any> {
+  //   return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/get_cerita.php");
+  // }
+  getCerita(searchTerm: string = ''): Observable<any> {
+    const url = `https://ubaya.me/hybrid/160721029/cerbung/get_cerita.php?searchTerm=${searchTerm}`;
+    return this.http.get(url);
   }
 
   getCeritaSearch(key: string): Observable<any> {
@@ -336,8 +340,8 @@ export class CerbungserviceService {
   }
 
   cerita: any[] = []
-  access: string = ''
-  paragraph: string = ''
+  access: string = '';
+  paragraph: string = '';
 
   arrCerita(newCerita: any): void {
     this.cerita.push(newCerita);
