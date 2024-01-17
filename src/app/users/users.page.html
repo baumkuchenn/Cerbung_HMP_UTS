@@ -17,7 +17,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-segment [(ngModel)]="tampilan" style="position: fixed; z-index: 1; width: 100%; background-color: rgb(26, 25, 25)">
+  <ion-segment [(ngModel)]="tampilan"
+    style="position: fixed; z-index: 1; width: 100%; background-color: rgb(26, 25, 25)">
     <ion-segment-button value="liked">
       <ion-label>Most Liked</ion-label>
     </ion-segment-button>
@@ -46,9 +47,11 @@
             since {{ item.tgl_akun_dibuat | date:'yyyy' }}
           </div>
         </ion-col>
-        <ion-col class="ion-text-end">
+        <ion-col class="ion-text-end" style="display: flex; align-items: center;">
           <!-- Align content to the end (right) -->
-          <h3>{{ item.like_count }} like(s)</h3>
+          <div style="flex-grow: 1;">
+            <h3 style="text-align: right;">{{ item.like_count }} like(s)</h3>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
