@@ -58,8 +58,8 @@
           </div>
         </ion-card-subtitle>
       </ion-card-header>
-      <ion-card-content *ngFor="let item of paragraf" style="text-align: justify">
-        {{item.paragraf.isi_paragraf}}
+      <ion-card-content *ngFor="let itemParagraf of paragraf" style="text-align: justify">
+        {{itemParagraf.paragraf.isi_paragraf}}
         <div style="
             display: flex;
             justify-content: space-between;
@@ -67,14 +67,14 @@
           ">
           <div style="display: flex; align-items: center">
             <ion-icon name="person-outline" style="margin-right: 8px"></ion-icon>
-            {{ item.paragraf.username }}
+            {{ itemParagraf.paragraf.username }}
           </div>
-          <ion-button (click)="tambahLike(item.paragraf.id, item.additionalData)"
+          <ion-button (click)="tambahLike(itemParagraf.paragraf.id, itemParagraf.additionalData, itemParagraf.paragraf.users_id, item.cerita[0].title)"
             style="color: white; --background: transparent">
-            <ion-icon *ngIf="item.additionalData === 'Liked'" name="thumbs-up" style="margin-right: 8px"></ion-icon>
-            <ion-icon *ngIf="item.additionalData === 'Not Liked'" name="thumbs-up-outline"
+            <ion-icon *ngIf="itemParagraf.additionalData === 'Liked'" name="thumbs-up" style="margin-right: 8px"></ion-icon>
+            <ion-icon *ngIf="itemParagraf.additionalData === 'Not Liked'" name="thumbs-up-outline"
               style="margin-right: 8px"></ion-icon>
-            {{ item.paragraf.total_likes }}
+            {{ itemParagraf.paragraf.total_likes }}
           </ion-button>
         </div>
       </ion-card-content>
@@ -89,16 +89,16 @@
         </div>
 
         <!-- Tombol "Submit" untuk mengirim paragraf baru -->
-        <ion-button (click)="tambahParagraf()" style="color: white;float: right;margin-top: 2vh;margin-bottom: 3vh;"
+        <ion-button (click)="tambahParagraf(item.cerita[0].title, item.cerita[0].users_id)" style="color: white;float: right;margin-top: 2vh;margin-bottom: 3vh;"
           shape="round">
           Submit
         </ion-button>
 
-        <ion-button (click)="followCerita()" *ngIf="followed === 'Followed'" shape="round"
+        <ion-button (click)="followCerita(item.cerita[0].users_id, item.cerita[0].title)" *ngIf="followed === 'Followed'" shape="round"
           style="float: left; margin-bottom: 3vh">
           Unfollow
         </ion-button>
-        <ion-button (click)="followCerita()" *ngIf="followed === 'Not Followed'" shape="round"
+        <ion-button (click)="followCerita(item.cerita[0].users_id, item.cerita[0].title)" *ngIf="followed === 'Not Followed'" shape="round"
           style="float: left; margin-bottom: 3vh">
           Follow
         </ion-button>
@@ -109,11 +109,11 @@
           + Request to Contribute
         </ion-button>
 
-        <ion-button (click)="followCerita()" *ngIf="followed === 'Followed'" shape="round"
+        <ion-button (click)="followCerita(item.cerita[0].users_id, item.cerita[0].title)" *ngIf="followed === 'Followed'" shape="round"
           style="float: left; margin-bottom: 3vh">
           Unfollow
         </ion-button>
-        <ion-button (click)="followCerita()" *ngIf="followed === 'Not Followed'" shape="round"
+        <ion-button (click)="followCerita(item.cerita[0].users_id, item.cerita[0].title)" *ngIf="followed === 'Not Followed'" shape="round"
           style="float: left; margin-bottom: 3vh">
           Follow
         </ion-button>

@@ -18,8 +18,8 @@
   </ion-header>
   <ion-card *ngFor="let notification of notifications">
     <ion-card-content>
-      {{notification.tglUpdate | date:'dd/MM/yyyy'}} <br>
-      {{ notification.message }}
+      {{notification.tgl_notifikasi | date:'dd/MM/yyyy'}} <br>
+      {{ notification.username_pengirim }} {{ notification.isi_notifikasi }}
     </ion-card-content>
   </ion-card>
 </ion-content>

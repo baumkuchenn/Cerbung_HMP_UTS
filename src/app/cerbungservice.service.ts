@@ -221,11 +221,11 @@ export class CerbungserviceService {
     }
     return null;
   }
-  getAllUser():Observable<any> {
+  getAllUser(): Observable<any> {
     return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/display_users.php");
   }
 
-  getMostLikedUser():Observable<any> {
+  getMostLikedUser(): Observable<any> {
     return this.http.get("https://ubaya.me/hybrid/160721029/cerbung/display_usersMostLiked.php");
   }
 
@@ -288,6 +288,15 @@ export class CerbungserviceService {
     const urlEncodedData = body.toString();
     return this.http.post(
       "https://ubaya.me/hybrid/160721029/cerbung/add_follow_cerita.php", urlEncodedData, { headers });
+  }
+
+  getFollowerCerita(pIdCerita: string): Observable<any>{
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idCerita', pIdCerita);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/get_follower_cerita.php", urlEncodedData, { headers });
   }
 
 
@@ -360,6 +369,27 @@ export class CerbungserviceService {
     return this.http.post(
       "https://ubaya.me/hybrid/160721029/cerbung/add_cerbung.php", urlEncodedData, { headers });
 
+  }
+
+  // NOTIFIKASI
+  getNotif(pIdUser: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idUser', pIdUser);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/get_notifikasi.php", urlEncodedData, { headers });
+  }
+
+  addNotif(pIdPenerima: string, pIdPengirim: string, pIsi: string) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    const body = new URLSearchParams();
+    body.set('idPenerima', pIdPenerima);
+    body.set('idPengirim', pIdPengirim);
+    body.set('isi', pIsi);
+    const urlEncodedData = body.toString();
+    return this.http.post(
+      "https://ubaya.me/hybrid/160721029/cerbung/add_notifikasi.php", urlEncodedData, { headers });
   }
 
   // LAMA

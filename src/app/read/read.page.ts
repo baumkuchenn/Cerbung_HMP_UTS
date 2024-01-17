@@ -70,43 +70,71 @@ export class ReadPage implements OnInit {
     );
   }
 
-  tambahLike(pIdParagraf: string, pStatus: string) {
+  tambahLike(pIdParagraf: string, pStatus: string, pIdPenerima: string, pTitle: string) {
     this.cerbungservice.tambahLikeParagraf(pIdParagraf, this.idUser, pStatus).subscribe(
       (response: any) => {
         alert(response.message);
         //Kirim notif
+        if (response.message == "Paragraf dilike") {
+          this.cerbungservice.addNotif(pIdPenerima, this.idUser, "liked your paragraph in " + pTitle).subscribe(
+            (response: any) => {
 
+            }
+          )
+        }
         window.location.reload();
       }
     );
   }
 
-  followCerita() {
+  followCerita(pIdPenerima: string, pTitle: string) {
     this.cerbungservice.tambahFollowCerita(this.idCerita, this.idUser, this.followed).subscribe(
       (response: any) => {
         alert(response.message)
         //Kirim notif
+        if (response.message == "Cerita difollow") {
+          this.cerbungservice.addNotif(pIdPenerima, this.idUser, "started following your " + pTitle + " story").subscribe(
+            (response: any) => {
 
+            }
+          )
+        }
 
         window.location.reload();
       }
     )
   }
 
-  async tambahParagraf() {
+  tambahParagraf(pTitle: string, pAuthor: string) {
     if (this.newParagraph.length > 0) {
       this.cerbungservice.tambahParagrafBaru(this.newParagraph, this.idUser, this.idCerita).subscribe(
         (response: any) => {
           alert(response.message);
           //Kirim notif
+          this.cerbungservice.addNotif(pAuthor, this.idUser, "added new paragraph into " + pTitle).subscribe(
+            (response: any) => {
+              
+            }
+          );
 
+          this.cerbungservice.getFollowerCerita(this.idCerita).subscribe(
+            (pengikut: any[]) => {
+              // Use Promise.all to wait for all notifications to be sent
+              const notificationPromises = pengikut.map((pengikutItem) => {
+                return this.cerbungservice.addNotif(pengikutItem.users_id, this.idUser, "added new paragraph into " + pTitle).toPromise();
+              });
 
-          window.location.reload();
+              // Wait for all notifications to be sent and then refresh the page
+              Promise.all(notificationPromises).then(() => {
+                window.location.reload();
+              });
+            }
+          );
         }
       )
     }
     else {
-      await this.presentAlert();
+      this.presentAlert();
     }
   }
 
@@ -120,7 +148,7 @@ export class ReadPage implements OnInit {
     await alert.present();
   }
 
-  requestContribute(){
+  requestContribute() {
 
   }
 }
